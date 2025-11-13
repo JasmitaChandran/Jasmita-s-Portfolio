@@ -48,7 +48,7 @@
 .post-feed {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  gap: 50px;
   width: 100%;
   max-width: 1200px;
 }
@@ -56,7 +56,7 @@
 .post-card {
   background: #121212;
   border-radius: 16px;
-  padding: 16px;
+  padding: 25px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }

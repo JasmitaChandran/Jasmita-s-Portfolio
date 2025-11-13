@@ -8,24 +8,18 @@ import linkedinLogo from '../../public/linkedin.png'
 import gmailLogo from '../../public/gmail.png'
 import whatsappLogo from '../../public/whatsapp.png'
 import instagramLogo from '../../public/insta.png'
-import facebookLogo from '../../public/facebook.png'
 
 export default function Home() {
   const professions = [
-    'AI Enthusiast',
-    'Machine Learning Engineer',
-    "Deep Learning Expert",
-    'Computer Vision Researcher',
-    'Developer',
+    'Java', 'Spring Boot','JavaScript', 'SQL', 'Microservices',
   ]
 
   const quickLinks = [
-    { img: githubLogo, title: 'GitHub', link: 'https://github.com/kunj2803' },
-    { img: linkedinLogo, title: 'LinkedIn', link: 'https://www.linkedin.com/in/kunj-desai-07717b293/' },
-    { img: gmailLogo, title: 'Email', link: 'kunjd2803@gmail.com' },
-    { img: whatsappLogo, title: 'WhatsApp', link: 'https://wa.me/+918758209508' },
-    { img: instagramLogo, title: 'Instagram', link: 'https://www.instagram.com/kunj_2834/' },
-    { img: facebookLogo, title: 'Facebook', link: 'https://www.facebook.com/kunj.desai.222608' },
+    { img: githubLogo, title: 'GitHub', link: 'https://github.com/JasmitaChandran' },
+    { img: linkedinLogo, title: 'LinkedIn', link: 'https://www.linkedin.com/in/jasmita-chandran/' },
+    { img: gmailLogo, title: 'Email', link: 'mailto:jasmitachandran24@gmail.com' },
+    { img: whatsappLogo, title: 'WhatsApp', link: 'https://wa.me/+917303655829' },
+    { img: instagramLogo, title: 'Instagram', link: 'https://www.instagram.com/jasmitachandran/' },
   ]
 
   return (
@@ -116,7 +110,7 @@ export default function Home() {
           >
             <motion.img
               src={photo}
-              alt="Kunj Desai"
+              alt="Jasmita Chandran"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1 }}
@@ -163,7 +157,7 @@ export default function Home() {
                 backgroundSize: '200%',
               }}
             >
-              Kunj Desai
+              Jasmita Chandran
             </motion.span>
           </h1>
 
@@ -177,7 +171,7 @@ export default function Home() {
               maxWidth: '95%',
             }}
           >
-          Aritificial Intellegence Engineer | Frontend Developer | Tech Explorer
+          Full Stack Developer | Fitness / Sports Enthusiast | Orator 
           </p>
 
           {/* --- Profession Tags --- */}
@@ -228,9 +222,9 @@ export default function Home() {
             }}
           >
             {[ 
-              { label: '📍 Location', value: 'Surat,Gujrat,India' },
-              { label: '💼 Expertise', value: 'AI/ML,Problem solving' },
-              { label: '📧 Contact', value: 'kunjd2803@gmail.com' },
+              { label: '📍 Location', value: 'New Delhi,India' },
+              { label: '💼 Expertise', value: 'Java, SpringBoot' },
+              { label: '📧 Contact', value: 'jasmitachandran24@gmail.com' },
             ].map((info, i) => (
               <motion.div
                 key={i}

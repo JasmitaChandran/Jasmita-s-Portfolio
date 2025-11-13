@@ -4,32 +4,56 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import "./Gallery.css";
 
 const IMAGES = {
-  personal: [
-    {
-      id: 1,
-      caption: "Lost in the beauty of the misty forest 🌲🌫️",
-      photos: ["/gallery/matheran.jpg", "/gallery/matheran2.jpg"],
-    },
+  achievements: [
+   
     {
       id: 2,
-      caption:
-        "Weekend getaway to clear my head 🌄 Sometimes inspiration strikes when you’re away from the screen.",
-      photos: ["/gallery/lonawala.jpg", "/gallery/lonawala2.jpg"],
+      caption: "Hosted Women’s Day 2023.",
+      photos: ["/gallery/B1.jpeg",
+        "/gallery/B2.jpeg"
+      ],
     },
-  ],
-  projects: [
+    {
+      id: 3,
+      caption: "Hosted a panel discussion at Placement Officer’s Meet 2023.",
+      photos: ["/gallery/C1.jpeg",
+        "/gallery/C2.jpeg"
+      ],
+    },
+    {
+      id: 4,
+      caption: "Secured 1st position in Relay Race and Basketball (2022) In SAP Scholympics.",
+      photos: ["/gallery/D1.jpeg",
+        "/gallery/D2.jpeg",
+        "/gallery/D3.jpeg",
+        "/gallery/D4.jpeg",
+      ],
+    },
+    {
+      id: 5,
+      caption: "Volunteered for Innvent for Customer Event 2024.",
+      photos: ["/gallery/E1.jpeg"],
+    },
+    {
+      id: 6,
+      caption: "Delivered training to 50+ freshers through an intensive 5-day workshop (9 AM–4 PM) on Java and Spring Boot. Conducted this training twice: for the 2024 batch (19th–23rd Aug 2024) and the 2025 batch (25th–29th Aug 2025).",
+      caption: "Volunteered at SAP Inside Track (SIT) 2023 & 2025.",
+      photos: ["/gallery/F1.jpeg",
+        "/gallery/F2.jpeg",
+        "/gallery/F3.jpeg",
+      ],
+    },
     {
       id: 1,
-      caption:
-        "It’s an AI-powered tool that understands what someone might be feeling based on their words.",
-      photos: ["/gallery/m.png", "/gallery/m2.jpeg"],
-    },
-  ],
-  achievements: [
-    {
-      id: 1,
-      caption: "Solved 1000 LeetCode questions 🏆!",
-      photos: ["/gallery/leet.jpeg"],
+      caption: "Delivered training to 50+ freshers through an intensive 5-day workshop (9 AM–4 PM) on Java and Spring Boot. Conducted this training twice: for the 2024 batch (19th–23rd Aug 2024) and the 2025 batch (25th–29th Aug 2025).",
+      photos: [
+        "/gallery/A1.jpeg",
+        "/gallery/A2.jpeg",
+        "/gallery/A3.jpeg",
+        "/gallery/A4.jpeg",
+        "/gallery/A5.jpeg",
+        "/gallery/A6.jpeg",
+      ],
     },
   ],
 };
@@ -67,7 +91,6 @@ const tabContentVariants = {
 };
 
 export default function Gallery() {
-  const [tab, setTab] = useState("personal");
   const [zoom, setZoom] = useState({ img: null, post: null, index: 0 });
 
   const openZoom = (post, index) =>
@@ -98,63 +121,44 @@ export default function Gallery() {
     >
       {/* 🌟 Title */}
       <motion.h2 className="gallery-title" variants={childVariants}>
-        Gallery
+        Roles and Achievements
       </motion.h2>
 
-      {/* 🧭 Tabs */}
-      <motion.div className="tab-buttons" variants={childVariants}>
-        {["personal", "projects", "achievements"].map((type) => (
-          <motion.button
-            key={type}
-            className={`tab ${tab === type ? "active" : ""}`}
-            onClick={() => setTab(type)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+      {/* 🖼️ Posts */}
+     <motion.div
+        className="post-feed"
+        variants={tabContentVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {IMAGES.achievements.map((post) => (
+          <motion.div
+            key={post.id}
+            className="post-card"
+            variants={childVariants}
+            whileHover={{ y: -4 }}
           >
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-          </motion.button>
+            <p className="caption">{post.caption}</p>
+            <div
+              className={`photo-grid ${
+                post.photos.length > 1 ? "multi" : "single"
+              }`}
+            >
+              {post.photos.map((src, i) => (
+                <motion.div
+                  key={i}
+                  className="photo-item"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 250 }}
+                  onClick={() => openZoom(post, i)}
+                >
+                  <img src={src} alt="gallery" />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         ))}
       </motion.div>
-
-      {/* 🖼️ Posts with Animation on Tab Switch */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={tab} // Important for AnimatePresence to detect tab change
-          className="post-feed"
-          variants={tabContentVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {IMAGES[tab].map((post) => (
-            <motion.div
-              key={post.id}
-              className="post-card"
-              variants={childVariants}
-              whileHover={{ y: -4 }}
-            >
-              <p className="caption">{post.caption}</p>
-              <div
-                className={`photo-grid ${
-                  post.photos.length > 1 ? "multi" : "single"
-                }`}
-              >
-                {post.photos.map((src, i) => (
-                  <motion.div
-                    key={i}
-                    className="photo-item"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 250 }}
-                    onClick={() => openZoom(post, i)}
-                  >
-                    <img src={src} alt="gallery" />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
 
       {/* 🔍 Zoom Overlay */}
       <AnimatePresence>
