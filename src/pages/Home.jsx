@@ -106,24 +106,34 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="section-kicker">
-              <Sparkles size={16} />
-              Full-Stack Developer
-            </span>
-            <h1>Jasmita Chandran</h1>
-            <p className="hero-subtitle">
-              Full-stack developer with strong expertise in Java and Spring Boot. Passionate about backend development while also experienced in frontend.
-            </p>
+            <div className="hero-profile">
+              <div className="portrait-shell">
+                <img src="/photo.jpg" alt="Jasmita Chandran" />
+              </div>
 
-            <div className="hero-actions">
-              <Link className="button primary" to="/projects">
-                <Rocket size={18} />
-                View Projects
-              </Link>
-              <a className="button ghost" href="/resume.pdf" download>
-                Resume
-                <ArrowUpRight size={17} />
-              </a>
+              <div className="hero-text">
+                <span className="section-kicker">
+                  <Sparkles size={16} />
+                  Full-Stack Developer
+                </span>
+                <h1>Jasmita Chandran</h1>
+                <p className="hero-subtitle">
+                  Full-stack developer with strong expertise in Java and Spring
+                  Boot. Passionate about backend development while also
+                  experienced in frontend.
+                </p>
+
+                <div className="hero-actions">
+                  <Link className="button primary" to="/projects">
+                    <Rocket size={18} />
+                    View Projects
+                  </Link>
+                  <a className="button ghost" href="/resume.pdf" download>
+                    Resume
+                    <ArrowUpRight size={17} />
+                  </a>
+                </div>
+              </div>
             </div>
 
           </motion.div>
@@ -134,17 +144,23 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <div className="portrait-shell">
-              <img src="/photo.jpg" alt="Jasmita Chandran" />
-            </div>
             <div className="code-card" aria-label="Developer profile summary">
-              <span className="code-dot red" />
-              <span className="code-dot amber" />
-              <span className="code-dot green" />
+              <div className="terminal-bar">
+                <div className="terminal-dots" aria-hidden="true">
+                  <span className="code-dot red" />
+                  <span className="code-dot amber" />
+                  <span className="code-dot green" />
+                </div>
+                <span>portfolio.java</span>
+                <strong>running</strong>
+              </div>
               <pre>{`public class Jasmita {
-    public static void main(String[] args) {
-        System.out.println("Hello, Recruiters!");
-    }
+  String craft = "Java + Spring Boot";
+  String focus = "Backend systems";
+
+  void build() {
+    ship("APIs", "React UI", "SAP apps");
+  }
 }`}</pre>
             </div>
           </motion.div>
