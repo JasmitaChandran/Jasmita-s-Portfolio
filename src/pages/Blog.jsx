@@ -1,42 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ThumbsUp, ThumbsDown } from "lucide-react";
+import { BookOpenText, ThumbsDown, ThumbsUp } from "lucide-react";
 import "./blog.css";
 
-export default function Blog() {
-  const defaultPosts = [
-    {
-      id: 1,
-      title: "Why I Love Building AI Projects",
-      text: "Working on AI-based systems like mammogram cancer detection has taught me how impactful technology can be when applied to healthcare. Combining deep learning with real-world problems is my favorite way to innovate.",
-    },
-    {
-      id: 2,
-      title: "My Thoughts on Design & Aesthetics",
-      text: "I believe design should be a balance between functionality and emotion. Dark themes with minimalist layouts always inspire me to create something that feels personal and futuristic.",
-    },
-    {
-      id: 3,
-      title: "Balancing Tech and Creativity",
-      text: "As someone who codes and dances, I’ve realized creativity isn’t limited to art — it also lives in algorithms. Each project is like choreography for the mind.",
-    },
-    {
-      id: 4,
-      title: "The Beauty of Simple Code",
-      text: "Clean code isn’t just about fewer lines — it’s about clarity. Elegance in code feels like poetry to me — each function should have rhythm and purpose.",
-    },
-  ];
+const defaultPosts = [
+  {
+    id: 1,
+    title: "Why I Love Building AI Projects",
+    text: "Working on AI-based systems like mammogram cancer detection taught me how impactful technology can be when it is applied to healthcare. Deep learning becomes more exciting when it meets real problems.",
+  },
+  {
+    id: 2,
+    title: "My Thoughts on Design and Aesthetics",
+    text: "I believe design should balance function and emotion. Dark interfaces, crisp hierarchy, and small motion details can make a portfolio feel personal without getting in the user's way.",
+  },
+  {
+    id: 3,
+    title: "Balancing Tech and Creativity",
+    text: "As someone who codes and performs, I have realized creativity is not limited to art. It also lives inside algorithms, debugging sessions, and the rhythm of a good product flow.",
+  },
+  {
+    id: 4,
+    title: "The Beauty of Simple Code",
+    text: "Clean code is not just about fewer lines. It is about clarity, ownership, and making the next engineer feel like the system wants to be understood.",
+  },
+];
 
+export default function Blog() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const savedVotes = JSON.parse(localStorage.getItem("kd_blog_votes") || "{}");
     const votedByUser = JSON.parse(localStorage.getItem("kd_blog_voted") || "{}");
-    const withVotes = defaultPosts.map((p) => ({
-      ...p,
-      agree: savedVotes[p.id]?.agree || 0,
-      disagree: savedVotes[p.id]?.disagree || 0,
-      userVote: votedByUser[p.id] || null,
+    const withVotes = defaultPosts.map((post) => ({
+      ...post,
+      agree: savedVotes[post.id]?.agree || 0,
+      disagree: savedVotes[post.id]?.disagree || 0,
+      userVote: votedByUser[post.id] || null,
     }));
     setPosts(withVotes);
   }, []);
@@ -45,13 +45,18 @@ export default function Blog() {
     const votedByUser = JSON.parse(localStorage.getItem("kd_blog_voted") || "{}");
     if (votedByUser[id]) return;
 
-    const next = posts.map((p) =>
-      p.id === id ? { ...p, [type]: p[type] + 1, userVote: type } : p
+    const next = posts.map((post) =>
+      post.id === id
+        ? { ...post, [type]: post[type] + 1, userVote: type }
+        : post
     );
     setPosts(next);
 
     const votes = Object.fromEntries(
-      next.map((p) => [p.id, { agree: p.agree, disagree: p.disagree }])
+      next.map((post) => [
+        post.id,
+        { agree: post.agree, disagree: post.disagree },
+      ])
     );
     localStorage.setItem("kd_blog_votes", JSON.stringify(votes));
     localStorage.setItem(
@@ -63,80 +68,79 @@ export default function Blog() {
   return (
     <motion.section
       className="blog-section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55 }}
     >
-      <motion.h2
-        className="blog-title"
-        initial={{ y: -15, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        📝 My Blog
-      </motion.h2>
-      <p className="blog-sub">
-        Personal thoughts, experiences, and reflections — feel free to react!
-      </p>
+      <div className="page-heading">
+        <span className="section-kicker">
+          <BookOpenText size={16} />
+          Notes
+        </span>
+        <h1>Thoughts from the build log.</h1>
+        <p>
+          Short reflections on AI, design, code clarity, and the creative energy
+          behind engineering work.
+        </p>
+      </div>
 
       <div className="blog-grid">
-        {posts.map((p, idx) => (
-          <motion.div
-            key={p.id}
+        {posts.map((post, index) => (
+          <motion.article
+            key={post.id}
             className="blog-post"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: idx * 0.15 }}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 0 20px rgba(255,255,255,0.1)",
-            }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.45, delay: index * 0.06 }}
           >
-            <h3 className="post-title">{p.title}</h3>
-            <p className="post-text">{p.text}</p>
+            <div>
+              <h2 className="post-title">{post.title}</h2>
+              <p className="post-text">{post.text}</p>
+            </div>
 
-            <div className="vote-container">
+            <div className="vote-container" aria-label={`${post.title} reactions`}>
               <motion.button
-                onClick={() => vote(p.id, "agree")}
-                disabled={!!p.userVote}
-                whileTap={{ scale: 0.85 }}
-                whileHover={{ scale: 1.15 }}
+                onClick={() => vote(post.id, "agree")}
+                disabled={!!post.userVote}
+                whileTap={{ scale: 0.92 }}
                 className={`vote-btn-circle agree ${
-                  p.userVote === "agree" ? "active" : ""
+                  post.userVote === "agree" ? "active" : ""
                 }`}
+                aria-label="Agree"
               >
-                <ThumbsUp size={20} />
+                <ThumbsUp size={19} />
                 <motion.span
-                  key={p.agree}
+                  key={post.agree}
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="vote-count"
                 >
-                  {p.agree}
+                  {post.agree}
                 </motion.span>
               </motion.button>
 
               <motion.button
-                onClick={() => vote(p.id, "disagree")}
-                disabled={!!p.userVote}
-                whileTap={{ scale: 0.85 }}
-                whileHover={{ scale: 1.15 }}
+                onClick={() => vote(post.id, "disagree")}
+                disabled={!!post.userVote}
+                whileTap={{ scale: 0.92 }}
                 className={`vote-btn-circle disagree ${
-                  p.userVote === "disagree" ? "active" : ""
+                  post.userVote === "disagree" ? "active" : ""
                 }`}
+                aria-label="Disagree"
               >
-                <ThumbsDown size={20} />
+                <ThumbsDown size={19} />
                 <motion.span
-                  key={p.disagree}
+                  key={post.disagree}
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="vote-count"
                 >
-                  {p.disagree}
+                  {post.disagree}
                 </motion.span>
               </motion.button>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </motion.section>

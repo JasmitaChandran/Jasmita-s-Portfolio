@@ -1,13 +1,42 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
+import {
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Send,
+} from "lucide-react";
 
-import githubLogo from "../../public/github.png";
-import linkedinLogo from "../../public/linkedin.png";
-import gmailLogo from "../../public/gmail.png";
-import whatsappLogo from "../../public/whatsapp.png";
-import instagramLogo from "../../public/insta.png";
-import facebookLogo from "../../public/facebook.png";
+const quickLinks = [
+  {
+    icon: Github,
+    title: "GitHub",
+    link: "https://github.com/JasmitaChandran",
+  },
+  {
+    icon: Linkedin,
+    title: "LinkedIn",
+    link: "https://www.linkedin.com/in/jasmita-chandran/",
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    link: "mailto:jasmitachandran24@gmail.com",
+  },
+  {
+    icon: MessageCircle,
+    title: "WhatsApp",
+    link: "https://wa.me/+917303655829",
+  },
+  {
+    icon: Instagram,
+    title: "Instagram",
+    link: "https://www.instagram.com/jasmitachandran/",
+  },
+];
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -18,23 +47,22 @@ export default function Contact() {
   });
   const [status, setStatus] = useState("");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    // Basic validation
     if (!form.name || !form.contact || !form.subject || !form.message) {
-      setStatus("⚠️ Please fill in all fields.");
+      setStatus("Please fill in all fields.");
       return;
     }
 
     const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     const isEmail = emailPattern.test(form.contact);
-    if (!isEmail && isNaN(form.contact)) {
-      setStatus("⚠️ Please enter a valid email or phone number.");
+    if (!isEmail && Number.isNaN(Number(form.contact))) {
+      setStatus("Please enter a valid email or phone number.");
       return;
     }
 
@@ -54,207 +82,116 @@ export default function Contact() {
       )
       .then(
         () => {
-          setStatus("✅ Message sent successfully!");
+          setStatus("Message sent successfully.");
           setForm({ name: "", contact: "", subject: "", message: "" });
         },
         (error) => {
           console.error("FAILED...", error);
-          setStatus("❌ Failed to send. Try again later.");
+          setStatus("Failed to send. Try again later.");
         }
       );
   };
 
-  const quickLinks = [
-    { img: githubLogo, title: "GitHub", link: "https://github.com/JasmitaChandran" },
-    {
-      img: linkedinLogo,
-      title: "LinkedIn",
-      link: "https://www.linkedin.com/in/jasmita-chandran/",
-    },
-    { img: gmailLogo, title: "Email", link: "mailto:jasmitachandran24@gmail.com" },
-    { img: whatsappLogo, title: "WhatsApp", link: "https://wa.me/+917303655829" },
-    { img: instagramLogo, title: "Instagram", link: "https://www.instagram.com/jasmitachandran/" },
-  ];
-
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        background: "radial-gradient(circle at 25% 25%, rgba(0,255,200,0.08), transparent 80%)",
-        color: "#fff",
-        padding: "2rem 1.5rem 4rem",
-        textAlign: "center",
-      }}
+    <motion.section
+      className="page-shell contact-page"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55 }}
     >
-      <motion.h1
-        initial={{ opacity: 0, y: -15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        style={{
-          fontSize: "2.6rem",
-          margin: "1.5rem 0 0.5rem 0",
-          background: "linear-gradient(90deg, var(--accent), var(--accent-2))",
-          WebkitBackgroundClip: "text",
-          color: "transparent",
-        }}
-      >
-        Let’s Connect & Collaborate 🤝
-      </motion.h1>
+      <div className="page-heading">
+        <span className="section-kicker">
+          <Send size={16} />
+          Contact
+        </span>
+        <h1>Let's build something worth remembering.</h1>
+        <p>
+          Reach out for collaboration, project ideas, speaking opportunities, or
+          a good full-stack problem.
+        </p>
+      </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        style={{
-          fontSize: "1.1rem",
-          color: "rgba(255,255,255,0.8)",
-          maxWidth: "700px",
-          marginBottom: "2rem",
-          lineHeight: 1.6,
-        }}
-      >
-        Whether it’s a new project, a collaboration, or just to say hi — I’d love to hear from you!
-      </motion.p>
+      <div className="contact-layout">
+        <aside className="contact-panel">
+          <h2>Signal channels</h2>
+          <p>
+            Pick the fastest route or send a detailed note. I usually respond
+            best when the message includes context, goal, and timeline.
+          </p>
+          <div className="contact-socials">
+            {quickLinks.map(({ icon: Icon, title, link }) => (
+              <a
+                key={title}
+                href={link}
+                title={title}
+                aria-label={title}
+                target={link.startsWith("mailto:") ? undefined : "_blank"}
+                rel={link.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              >
+                <Icon size={22} />
+              </a>
+            ))}
+          </div>
+        </aside>
 
-      {/* 🌟 Quick Links */}
-      <motion.div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "25px",
-          marginBottom: "2.2rem",
-        }}
-      >
-        {quickLinks.map((item, i) => (
-          <motion.a
-            key={i}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.15, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 250 }}
-          >
-            <motion.img
-              src={item.img}
-              alt={item.title}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 3 + i * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                width: "60px",
-                height: "60px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                border: "2px solid var(--accent)",
-                background: "rgba(255,255,255,0.05)",
-                padding: "8px",
-              }}
-            />
-          </motion.a>
-        ))}
-      </motion.div>
-
-      {/* 💌 Contact Form */}
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.9 }}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "14px",
-          width: "100%",
-          maxWidth: "500px",
-        }}
-      >
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-          aria-label="Your name"
-          style={inputStyle}
-        />
-        <input
-          type="text"
-          name="contact"
-          placeholder="Your Email or Phone"
-          value={form.contact}
-          onChange={handleChange}
-          required
-          aria-label="Your contact info"
-          style={inputStyle}
-        />
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          value={form.subject}
-          onChange={handleChange}
-          required
-          aria-label="Subject"
-          style={inputStyle}
-        />
-        <textarea
-          name="message"
-          placeholder="Your Message..."
-          value={form.message}
-          onChange={handleChange}
-          required
-          rows="5"
-          aria-label="Your message"
-          style={{ ...inputStyle, resize: "none" }}
-        />
-        <motion.button
-          type="submit"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{
-            padding: "12px",
-            background: "linear-gradient(90deg, var(--accent), var(--accent-2))",
-            border: "none",
-            borderRadius: "8px",
-            color: "#fff",
-            fontWeight: "600",
-            cursor: "pointer",
-          }}
+        <motion.form
+          className="contact-form"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.15, duration: 0.55 }}
         >
-          🚀 Send Message
-        </motion.button>
-
-        {/* Animated status */}
-        {status && (
-          <motion.p
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{ marginTop: 10, color: "#0ff", fontWeight: 500 }}
-          >
-            {status}
-          </motion.p>
-        )}
-      </motion.form>
-    </section>
+          <label>
+            Your Name
+            <input
+              type="text"
+              name="name"
+              placeholder="Jasmita's collaborator"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Email or Phone
+            <input
+              type="text"
+              name="contact"
+              placeholder="name@example.com"
+              value={form.contact}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Subject
+            <input
+              type="text"
+              name="subject"
+              placeholder="Project idea, role, or collaboration"
+              value={form.subject}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Message
+            <textarea
+              name="message"
+              placeholder="Tell me what we are building..."
+              value={form.message}
+              onChange={handleChange}
+              required
+              rows="6"
+            />
+          </label>
+          <button className="button primary" type="submit">
+            <Send size={18} />
+            Send Message
+          </button>
+          {status && <p className="form-status">{status}</p>}
+        </motion.form>
+      </div>
+    </motion.section>
   );
 }
-
-const inputStyle = {
-  padding: "12px",
-  borderRadius: "8px",
-  border: "none",
-  background: "rgba(255,255,255,0.08)",
-  color: "#fff",
-  outline: "none",
-};

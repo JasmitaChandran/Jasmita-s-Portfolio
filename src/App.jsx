@@ -16,7 +16,7 @@ export default function App() {
   return (
     <div className="app">
       <Navbar />
-      <main style={{ flex: 1 }}>
+      <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
@@ -25,13 +25,14 @@ export default function App() {
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="/about" element={<About />} /> {/* ✅ fixed lowercase */}
+          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <footer className="footer">
-        © {new Date().getFullYear()} Jasmita Chandran
+        <strong>Jasmita Chandran</strong>
+        <span>Built with React, motion, and a lot of curiosity. {new Date().getFullYear()}</span>
       </footer>
     </div>
   )

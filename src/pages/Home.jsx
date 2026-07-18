@@ -1,309 +1,237 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Code2,
+  Database,
+  Github,
+  Instagram,
+  Layers3,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Rocket,
+  Sparkles,
+  Trophy,
+} from "lucide-react";
 
-// 🖼️ Import Assets
-import photo from '../../public/photo.jpg'
-import githubLogo from '../../public/github.png'
-import linkedinLogo from '../../public/linkedin.png'
-import gmailLogo from '../../public/gmail.png'
-import whatsappLogo from '../../public/whatsapp.png'
-import instagramLogo from '../../public/insta.png'
+const techStack = [
+  "Java",
+  "Spring Boot",
+  "JavaScript",
+  "React",
+  "SAP UI5",
+  "Microservices",
+  "SQL",
+  "SAP BTP",
+];
+
+const highlights = [
+  {
+    icon: BriefcaseBusiness,
+    label: "Current Role",
+    value: "Associate Developer at SAP Labs India",
+  },
+  {
+    icon: Trophy,
+    label: "Impact",
+    value: "Trainer, speaker, athlete, and builder",
+  },
+  {
+    icon: MapPin,
+    label: "Base",
+    value: "New Delhi, India",
+  },
+];
+
+const metrics = [
+  { value: "16", label: "Inbound entities delivered" },
+  { value: "30+", label: "Defects resolved across UI and backend" },
+  { value: "10k+", label: "JUnit test lines added" },
+];
+
+const socialLinks = [
+  {
+    icon: Github,
+    title: "GitHub",
+    link: "https://github.com/JasmitaChandran",
+  },
+  {
+    icon: Linkedin,
+    title: "LinkedIn",
+    link: "https://www.linkedin.com/in/jasmita-chandran/",
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    link: "mailto:jasmitachandran24@gmail.com",
+  },
+  {
+    icon: MessageCircle,
+    title: "WhatsApp",
+    link: "https://wa.me/+917303655829",
+  },
+  {
+    icon: Instagram,
+    title: "Instagram",
+    link: "https://www.instagram.com/jasmitachandran/",
+  },
+];
+
+const craftCards = [
+  {
+    icon: Code2,
+    title: "Backend Systems",
+    text: "Java, Spring Boot, validations, APIs, data contracts, and reliability work.",
+  },
+  {
+    icon: Layers3,
+    title: "Enterprise UI",
+    text: "SAP Fiori/UI5, Angular, React, accessibility fixes, and polished interaction states.",
+  },
+  {
+    icon: Database,
+    title: "Data Products",
+    text: "AI experiments, profiling tools, document chat, and healthcare-focused ML ideas.",
+  },
+];
 
 export default function Home() {
-  const professions = [
-    'Java', 'Spring Boot','JavaScript', 'SQL', 'Microservices',
-  ]
-
-  const quickLinks = [
-    { img: githubLogo, title: 'GitHub', link: 'https://github.com/JasmitaChandran' },
-    { img: linkedinLogo, title: 'LinkedIn', link: 'https://www.linkedin.com/in/jasmita-chandran/' },
-    { img: gmailLogo, title: 'Email', link: 'mailto:jasmitachandran24@gmail.com' },
-    { img: whatsappLogo, title: 'WhatsApp', link: 'https://wa.me/+917303655829' },
-    { img: instagramLogo, title: 'Instagram', link: 'https://www.instagram.com/jasmitachandran/' },
-  ]
-
   return (
-    <section
-      style={{
-        minHeight: '100vh',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        gap: '3rem',
-        alignItems: 'center',
-        padding: '3rem 2rem 1rem',
-        background: 'radial-gradient(circle at 30% 30%, rgba(0,255,200,0.08), transparent 80%)',
-        color: '#fff',
-      }}
-    >
-      <style>
-        {`
-          @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-          }
-          @keyframes blink {
-            50% { border-color: transparent; }
-          }
-          .typing-effect {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: .15em solid var(--accent);
-            width: 0;
-            animation: typing 3.5s steps(40, end) forwards, blink .8s infinite;
-          }
-        `}
-      </style>
-
-      {/* --- Top Section: Photo + Info --- */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          width: '100%',
-          maxWidth: '1250px',
-          flexWrap: 'wrap',
-          gap: '2rem',
-        }}
-      >
-        {/* --- Left: Animated Glowing Photo --- */}
-        <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          style={{
-            position: 'relative',
-            flex: '0 0 380px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+    <main className="home-page">
+      <section className="hero-lab">
+        <div className="hero-grid">
           <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            style={{
-              position: 'absolute',
-              width: '330px',
-              height: '330px',
-              borderRadius: '50%',
-              border: '2px dashed var(--accent)',
-              opacity: 0.3,
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            style={{
-              position: 'relative',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              width: '300px',
-              height: '300px',
-              boxShadow: '0 0 45px rgba(0,255,200,0.25)',
-              border: '3px solid var(--accent)',
-              zIndex: 1,
-            }}
-          >
-            <motion.img
-              src={photo}
-              alt="Jasmita Chandran"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1 }}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '50%',
-              }}
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* --- Right: Info Section --- */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          style={{
-            flex: 1,
-            minWidth: '360px',
-            maxWidth: '700px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '3rem',
-              fontWeight: 700,
-              lineHeight: 1.2,
-              marginBottom: '0.4rem',
-            }}
-          >
-            Hi, I’m{' '}
-            <motion.span
-              animate={{ backgroundPositionX: ['0%', '200%'] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-              style={{
-                background: 'linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent))',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-                backgroundSize: '200%',
-              }}
-            >
-              Jasmita Chandran
-            </motion.span>
-          </h1>
-
-          {/* --- Typing Animated Text --- */}
-          <p
-            className="typing-effect"
-            style={{
-              fontSize: '1.2rem',
-              color: 'rgba(255,255,255,0.85)',
-              marginTop: '0.4rem',
-              maxWidth: '95%',
-            }}
-          >
-          Full Stack Developer | Fitness / Sports Enthusiast | Orator 
-          </p>
-
-          {/* --- Profession Tags --- */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            className="hero-copy"
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.8rem',
-              marginTop: '1.4rem',
-            }}
+            transition={{ duration: 0.7 }}
           >
-            {professions.map((role, i) => (
-              <motion.div
-                key={i}
-                whileHover={{
-                  scale: 1.05,
-                  background: 'linear-gradient(90deg,var(--accent),var(--accent-2))',
-                }}
-                transition={{ type: 'spring', stiffness: 200 }}
-                style={{
-                  border: '1px solid var(--accent)',
-                  padding: '8px 16px',
-                  borderRadius: '20px',
-                  fontSize: '0.95rem',
-                  color: 'rgba(255,255,255,0.85)',
-                  cursor: 'default',
-                  background: 'rgba(255,255,255,0.05)',
-                }}
-              >
-                {role}
-              </motion.div>
-            ))}
+            <span className="section-kicker">
+              <Sparkles size={16} />
+              Java, SAP and full stack craft
+            </span>
+            <h1>Jasmita Chandran</h1>
+            <p className="hero-subtitle">
+              I build enterprise-grade systems with a creative edge: reliable
+              backend services, thoughtful user interfaces, and AI-powered
+              experiments that solve real problems.
+            </p>
+
+            <div className="hero-actions">
+              <Link className="button primary" to="/projects">
+                <Rocket size={18} />
+                View Projects
+              </Link>
+              <a className="button ghost" href="/resume.pdf" download>
+                Resume
+                <ArrowUpRight size={17} />
+              </a>
+            </div>
+
+            <div className="tech-marquee" aria-label="Technology stack">
+              {[...techStack, ...techStack].map((item, index) => (
+                <span key={`${item}-${index}`}>{item}</span>
+              ))}
+            </div>
           </motion.div>
 
-          {/* --- Info Cards --- */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              marginTop: '1.2rem',
-            }}
+            className="hero-visual"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
           >
-            {[ 
-              { label: '📍 Location', value: 'New Delhi,India' },
-              { label: '💼 Expertise', value: 'Java, SpringBoot' },
-              { label: '📧 Contact', value: 'jasmitachandran24@gmail.com' },
-            ].map((info, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -4, scale: 1.05 }}
-                transition={{ type: 'spring', stiffness: 250 }}
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  borderRadius: '12px',
-                  padding: '12px 18px',
-                  minWidth: '180px',
-                  textAlign: 'center',
-                  boxShadow: '0 0 10px rgba(0,255,200,0.08)',
-                }}
-              >
-                <strong style={{ fontSize: '1rem' }}>{info.label}</strong>
-                <p
-                  style={{
-                    fontSize: '0.9rem',
-                    color: 'rgba(255,255,255,0.7)',
-                    marginTop: '4px',
-                  }}
-                >
-                  {info.value}
-                </p>
-              </motion.div>
-            ))}
+            <div className="portrait-shell">
+              <img src="/photo.jpg" alt="Jasmita Chandran" />
+              <div className="portrait-tag top">open to bold builds</div>
+              <div className="portrait-tag bottom">ship. learn. lead.</div>
+            </div>
+            <div className="code-card" aria-label="Developer profile summary">
+              <span className="code-dot red" />
+              <span className="code-dot amber" />
+              <span className="code-dot green" />
+              <pre>{`const jasmita = {
+  craft: "full-stack",
+  mode: "builder + speaker",
+  stack: ["Java", "React", "SAP"]
+}`}</pre>
+            </div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
-
-      {/* --- Bottom Quick Links --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
-        style={{
-          textAlign: 'center',
-          marginTop: '1.2rem',
-        }}
-      >
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>Connect</h2>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '22px',
-          }}
-        >
-          {quickLinks.map((item, i) => (
-            <motion.a
-              key={i}
-              href={item.link}
-              title={item.title}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 250 }}
-            >
-              <motion.img
-                src={item.img}
-                alt={item.title}
-                whileHover={{
-                  filter: 'drop-shadow(0 0 15px var(--accent)) brightness(1.2)',
-                }}
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                  filter: 'brightness(0.9)',
-                  transition: 'all 0.3s ease',
-                }}
-              />
-            </motion.a>
+      <section className="home-snapshot page-shell">
+        <div className="metrics-strip">
+          {metrics.map((metric) => (
+            <div className="metric-card" key={metric.label}>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+            </div>
           ))}
         </div>
-      </motion.div>
-    </section>
-  )
+
+        <div className="split-section">
+          <div>
+            <span className="section-kicker">Profile</span>
+            <h2 className="section-title">Engineer with stage energy.</h2>
+            <p className="section-copy">
+              My work sits at the intersection of enterprise development,
+              public speaking, mentoring, sports discipline, and creative
+              execution. I care about systems that are stable under pressure and
+              interfaces that feel effortless to use.
+            </p>
+          </div>
+
+          <div className="highlight-grid">
+            {highlights.map(({ icon: Icon, label, value }) => (
+              <motion.article
+                className="highlight-card"
+                key={label}
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 240, damping: 20 }}
+              >
+                <Icon size={22} />
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+
+        <div className="craft-grid">
+          {craftCards.map(({ icon: Icon, title, text }) => (
+            <motion.article
+              className="craft-card"
+              key={title}
+              whileHover={{ y: -8 }}
+              transition={{ type: "spring", stiffness: 220, damping: 18 }}
+            >
+              <Icon size={24} />
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="social-dock" aria-label="Social links">
+          {socialLinks.map(({ icon: Icon, title, link }) => (
+            <a
+              href={link}
+              key={title}
+              title={title}
+              aria-label={title}
+              target={link.startsWith("mailto:") ? undefined : "_blank"}
+              rel={link.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+            >
+              <Icon size={21} />
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }

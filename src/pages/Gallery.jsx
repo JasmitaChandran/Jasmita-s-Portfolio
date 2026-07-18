@@ -1,199 +1,181 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Award, ChevronLeft, ChevronRight, Images, X } from "lucide-react";
 import "./Gallery.css";
 
-const IMAGES = {
-  achievements: [
-   
-    {
-      id: 2,
-      caption: "Hosted Women’s Day 2023.",
-      photos: ["/gallery/B1.jpeg",
-        "/gallery/B2.jpeg"
-      ],
-    },
-    {
-      id: 3,
-      caption: "Hosted a panel discussion at Placement Officer’s Meet 2023.",
-      photos: ["/gallery/C1.jpeg",
-        "/gallery/C2.jpeg"
-      ],
-    },
-    {
-      id: 4,
-      caption: "Secured 1st position in Relay Race and Basketball (2022) In SAP Scholympics.",
-      photos: ["/gallery/D1.jpeg",
-        "/gallery/D2.jpeg",
-        "/gallery/D3.jpeg",
-        "/gallery/D4.jpeg",
-      ],
-    },
-    {
-      id: 5,
-      caption: "Volunteered for Innvent for Customer Event 2024.",
-      photos: ["/gallery/E1.jpeg"],
-    },
-    {
-      id: 6,
-      caption: "Delivered training to 50+ freshers through an intensive 5-day workshop (9 AM–4 PM) on Java and Spring Boot. Conducted this training twice: for the 2024 batch (19th–23rd Aug 2024) and the 2025 batch (25th–29th Aug 2025).",
-      caption: "Volunteered at SAP Inside Track (SIT) 2023 & 2025.",
-      photos: ["/gallery/F1.jpeg",
-        "/gallery/F2.jpeg",
-        "/gallery/F3.jpeg",
-      ],
-    },
-    {
-      id: 1,
-      caption: "Delivered training to 50+ freshers through an intensive 5-day workshop (9 AM–4 PM) on Java and Spring Boot. Conducted this training twice: for the 2024 batch (19th–23rd Aug 2024) and the 2025 batch (25th–29th Aug 2025).",
-      photos: [
-        "/gallery/A1.jpeg",
-        "/gallery/A2.jpeg",
-        "/gallery/A3.jpeg",
-        "/gallery/A4.jpeg",
-        "/gallery/A5.jpeg",
-        "/gallery/A6.jpeg",
-      ],
-    },
-  ],
-};
-
-// ✨ Animation Variants
-const pageVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.2,
-      duration: 0.8,
-      ease: "easeOut",
-    },
+const ACHIEVEMENTS = [
+  {
+    id: 1,
+    label: "Leadership",
+    caption: "Delivered Java and Spring Boot training to 50+ freshers through intensive 5-day workshops for the 2024 and 2025 batches.",
+    photos: [
+      "/gallery/A1.jpeg",
+      "/gallery/A2.jpeg",
+      "/gallery/A3.jpeg",
+      "/gallery/A4.jpeg",
+      "/gallery/A5.jpeg",
+      "/gallery/A6.jpeg",
+    ],
   },
-};
-
-const childVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-// ✨ Tab Switching Animations
-const tabContentVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+  {
+    id: 2,
+    label: "Hosting",
+    caption: "Hosted Women's Day 2023.",
+    photos: ["/gallery/B1.jpeg", "/gallery/B2.jpeg"],
   },
-  exit: { opacity: 0, y: -30, scale: 0.98, transition: { duration: 0.4 } },
-};
+  {
+    id: 3,
+    label: "Stage",
+    caption: "Hosted a panel discussion at Placement Officer's Meet 2023.",
+    photos: ["/gallery/C1.jpeg", "/gallery/C2.jpeg"],
+  },
+  {
+    id: 4,
+    label: "Sports",
+    caption: "Secured 1st position in relay race and basketball at SAP Scholympics 2022.",
+    photos: [
+      "/gallery/D1.jpeg",
+      "/gallery/D2.jpeg",
+      "/gallery/D3.jpeg",
+      "/gallery/D4.jpeg",
+    ],
+  },
+  {
+    id: 5,
+    label: "Volunteer",
+    caption: "Volunteered for Innvent for Customer Event 2024.",
+    photos: ["/gallery/E1.jpeg"],
+  },
+  {
+    id: 6,
+    label: "Community",
+    caption: "Volunteered at SAP Inside Track 2023 and 2025.",
+    photos: ["/gallery/F1.jpeg", "/gallery/F2.jpeg", "/gallery/F3.jpeg"],
+  },
+];
 
 export default function Gallery() {
-  const [zoom, setZoom] = useState({ img: null, post: null, index: 0 });
+  const [zoom, setZoom] = useState({ post: null, index: 0 });
+  const activeImage = zoom.post?.photos[zoom.index];
 
-  const openZoom = (post, index) =>
-    setZoom({ img: post.photos[index], post, index });
-
-  const closeZoom = () => setZoom({ img: null, post: null, index: 0 });
+  const openZoom = (post, index) => setZoom({ post, index });
+  const closeZoom = () => setZoom({ post: null, index: 0 });
 
   const nextImage = () => {
     if (!zoom.post) return;
-    const nextIndex = (zoom.index + 1) % zoom.post.photos.length;
-    setZoom({ ...zoom, img: zoom.post.photos[nextIndex], index: nextIndex });
+    setZoom({
+      ...zoom,
+      index: (zoom.index + 1) % zoom.post.photos.length,
+    });
   };
 
   const prevImage = () => {
     if (!zoom.post) return;
-    const prevIndex =
-      (zoom.index - 1 + zoom.post.photos.length) % zoom.post.photos.length;
-    setZoom({ ...zoom, img: zoom.post.photos[prevIndex], index: prevIndex });
+    setZoom({
+      ...zoom,
+      index: (zoom.index - 1 + zoom.post.photos.length) % zoom.post.photos.length,
+    });
   };
 
   return (
     <motion.section
       className="gallery-container"
-      variants={pageVariants}
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55 }}
     >
-      {/* 🌟 Title */}
-      <motion.h2 className="gallery-title" variants={childVariants}>
-        Roles and Achievements
-      </motion.h2>
+      <div className="page-heading">
+        <span className="section-kicker">
+          <Award size={16} />
+          Roles and achievements
+        </span>
+        <h1>Moments that show the range.</h1>
+        <p>
+          Speaking, volunteering, training, sports, and community moments from
+          the professional journey around the code.
+        </p>
+      </div>
 
-      {/* 🖼️ Posts */}
-     <motion.div
-        className="post-feed"
-        variants={tabContentVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {IMAGES.achievements.map((post) => (
-          <motion.div
-            key={post.id}
+      <div className="post-feed">
+        {ACHIEVEMENTS.map((post, index) => (
+          <motion.article
             className="post-card"
-            variants={childVariants}
-            whileHover={{ y: -4 }}
+            key={post.id}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.45, delay: index * 0.06 }}
+            whileHover={{ y: -8 }}
           >
+            <div className="post-card-head">
+              <span>{post.label}</span>
+              <small>
+                <Images size={14} />
+                {post.photos.length}
+              </small>
+            </div>
             <p className="caption">{post.caption}</p>
             <div
               className={`photo-grid ${
                 post.photos.length > 1 ? "multi" : "single"
               }`}
             >
-              {post.photos.map((src, i) => (
-                <motion.div
-                  key={i}
+              {post.photos.slice(0, 4).map((src, photoIndex) => (
+                <button
+                  key={src}
                   className="photo-item"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 250 }}
-                  onClick={() => openZoom(post, i)}
+                  onClick={() => openZoom(post, photoIndex)}
+                  aria-label={`Open ${post.label} photo ${photoIndex + 1}`}
                 >
-                  <img src={src} alt="gallery" />
-                </motion.div>
+                  <img src={src} alt={`${post.label} ${photoIndex + 1}`} />
+                  {photoIndex === 3 && post.photos.length > 4 && (
+                    <span>+{post.photos.length - 4}</span>
+                  )}
+                </button>
               ))}
             </div>
-          </motion.div>
+          </motion.article>
         ))}
-      </motion.div>
+      </div>
 
-      {/* 🔍 Zoom Overlay */}
       <AnimatePresence>
-        {zoom.img && (
+        {activeImage && (
           <motion.div
             className="zoom-overlay"
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            <motion.img
-              key={zoom.img}
-              src={zoom.img}
-              alt="zoom"
-              className="zoom-img"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            <button className="close-btn" onClick={closeZoom} aria-label="Close preview">
+              <X size={26} />
+            </button>
 
             {zoom.post?.photos.length > 1 && (
               <>
-                <button className="nav-btn left" onClick={prevImage}>
-                  <ChevronLeft size={32} />
+                <button className="nav-btn left" onClick={prevImage} aria-label="Previous image">
+                  <ChevronLeft size={30} />
                 </button>
-                <button className="nav-btn right" onClick={nextImage}>
-                  <ChevronRight size={32} />
+                <button className="nav-btn right" onClick={nextImage} aria-label="Next image">
+                  <ChevronRight size={30} />
                 </button>
               </>
             )}
-            <button className="close-btn" onClick={closeZoom}>
-              <X size={28} />
-            </button>
+
+            <motion.figure
+              className="zoom-frame"
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+            >
+              <img src={activeImage} alt={zoom.post.caption} />
+              <figcaption>
+                <strong>{zoom.post.label}</strong>
+                <span>
+                  {zoom.index + 1} / {zoom.post.photos.length}
+                </span>
+              </figcaption>
+            </motion.figure>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,467 +1,129 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaUniversity, FaSchool, FaGraduationCap } from "react-icons/fa";
+import { BriefcaseBusiness, Building2, CheckCircle2, Code2 } from "lucide-react";
 
-const AboutMe = () => {
+const experiences = [
+  {
+    title: "SAP Ariba Procurement",
+    role: "Associate Developer",
+    period: "Jul 2024 - Present",
+    bullets: [
+      "Developed 16 inbound entities in MDCS with JSON schema validation, transformation mapping, CDS schemas, and service integration.",
+      "Implemented file upload for 7 entities with Excel-to-JSON parsing and automated data publishing into SAP MDCS.",
+      "Migrated Angular from v11 to v18.2 and improved SAP Fiori/UI5 search, filters, layout persistence, and upload flows.",
+      "Resolved 20+ UI defects and 10 backend defects while increasing JUnit coverage by 5% with 10,000+ lines of tests.",
+    ],
+  },
+  {
+    title: "Success Factors Next Gen Payroll",
+    role: "Scholar@SAP",
+    period: "Jan 2024 - Jun 2024",
+    bullets: [
+      "Worked across Java, Spring Boot, Freestyle Fiori, and Eureka-based microservices.",
+      "Solved 10+ UI accessibility defects.",
+      "Built verification logic in Java and tested it through JUnit and Mockito.",
+    ],
+  },
+  {
+    title: "UX Engineering - SAP Fiori V2",
+    role: "Scholar@SAP",
+    period: "Jun 2023 - Dec 2023",
+    bullets: [
+      "Handled 40+ internal and customer incidents through BCP, IMS, and ServiceNow.",
+      "Built working understanding of Fiori Elements, XML templating, message handling, side effects, app state handling, MVC protocol, and annotations.",
+      "Collaborated with customers across Germany, USA, and China.",
+    ],
+  },
+  {
+    title: "Digital Vehicle Operations",
+    role: "Scholar@SAP",
+    period: "Sept 2022 - May 2023",
+    bullets: [
+      "Implemented and deployed Bookshop and Quotation applications on HANA Trial with CAP Java and CRUD flows.",
+      "Designed Fiori annotation-driven object pages and deployed them with SQLite.",
+      "Explored audit logging and added Java validations tested with JUnit and Mockito.",
+    ],
+  },
+  {
+    title: "Shriram Pistons & Rings Ltd",
+    role: "Business Applications in Java Intern",
+    period: "Jul 2021 - Sep 2021",
+    bullets: [
+      "Developed backend functionality with Java and JDBC.",
+      "Designed and implemented database schemas for reliable data management.",
+    ],
+  },
+  {
+    title: "QA-Solvers",
+    role: "Subject Matter Expert Intern",
+    period: "Jul 2020 - Oct 2020",
+    bullets: [
+      "Created 90+ doubt-solving videos on web development, Python, Java, and MySQL for Bartleby.",
+      "Created 10+ doubt-solving videos for class 9 and 10 mathematics for Vedantu.",
+    ],
+  },
+];
+
+export default function Certificates() {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "radial-gradient(circle at top, #0d0d0d, #000)",
-        color: "white",
-        padding: "3rem 1rem",
-      }}
+    <motion.section
+      className="page-shell work-page"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55 }}
     >
-      {/* --- About Me + Education Section --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-        style={{
-          width: "100%",
-          maxWidth: "1100px",
-          textAlign: "left",
-          marginTop: "1rem",
-          lineHeight: 1.8,
-          background: "rgba(255,255,255,0.04)",
-          padding: "3rem 3.5rem",
-          borderRadius: "18px",
-          boxShadow: "0 0 25px rgba(0,255,200,0.08)",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        {/* --- Header --- */}
-        {/* <h2
-          style={{
-            fontSize: "1.9rem",
-            marginBottom: "1.2rem",
-            background: "linear-gradient(90deg, var(--accent), var(--accent-2))",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-          }}
-        >
-          About Me
-        </h2> */}
+      <div className="page-heading">
+        <span className="section-kicker">
+          <BriefcaseBusiness size={16} />
+          Work experience
+        </span>
+        <h1>Enterprise work, practical impact.</h1>
+        <p>
+          From SAP product teams to early internships, each role sharpened a
+          different part of the stack: backend services, Fiori interfaces,
+          testing, customer incidents, and developer enablement.
+        </p>
+      </div>
 
-        {/* --- Description --- */}
-        {/* <p
-          style={{
-            fontSize: "1.1rem",
-            color: "rgba(255,255,255,0.85)",
-            marginBottom: "1rem",
-          }}
-        >
-          Hi, I’m <strong>Jasmita Chandran</strong> — an associate developer at SAP Labs India. I have been passionate about technology and development for years, and my journey with SAP began as a scholar@SAP, where I boosted my skills and gained invaluable experience.
-
-I specialize in Java, Springboot, Angular,React, JavaScript, NodeJS, SAP UI5, and SAP BTP. My background as a scholar@SAP has equipped me with a solid foundation in both back-end and front-end technologies, enabling me to deliver high-quality, scalable solutions.
-
-I'm always eager to connect with fellow professionals and explore new opportunities in the tech industry. If you're interested in collaborating, networking, or discussing potential opportunities, feel free to reach out. Let's connect!
-        </p> */}
-
-        {/* --- Education Section --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          style={{ marginTop: "3rem" }}
-        >
-          <h3
-            style={{
-              fontSize: "1.6rem",
-              marginBottom: "1.5rem",
-              background:
-                "linear-gradient(90deg, var(--accent), var(--accent-2))",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Work Experience
-          </h3>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              position: "relative",
-              marginLeft: "2rem",
-              paddingLeft: "1rem",
-              borderLeft: "2px dashed rgba(255,255,255,0.2)",
-            }}
-          >
-            {/* --- Timeline Item 1 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem", // Adjusted to align the dot center with the line
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-               SAP Ariba Procurement
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                <i>Associate Developer</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-            
-                  <ul>
-                    <li>
-                    Developed 16 Inbound Entities in MDCS by implementing JSON schema validations, transformation mappings (MDI - MDNI - ODM), and CDS schemas across publish-service, search-service, cap-mdcs, and mdcs-client.
-                    </li>
-                    <li>
-                    Implemented file upload functionality for 7 entities, supporting Excel-to-JSON parsing and automated data publishing into SAP MDCS.
-                    </li>
-                    <li>
-                    Migrated Angular framework from v11 to v18.2 to enhance application performance.
-                    </li>
-                    <li>
-                    Worked on SAP Fiori (UI5) enhancements for Master Data application - implemented search, filtering, layout persistence, file upload enhancements, and cross-browser defect fixes to improve user experience.
-                    </li>
-                    <li>
-                    Made instruction sheet generation dynamic by integrating APIs across two repositories, enabling automated data fetching, and eliminating manual intervention.
-                    </li>
-                    <li>
-                    Resolved over 20 UI defects and 10 backend defects to improve overall system reliability.
-                    </li>
-                    <li>
-                    Increased JUnit test coverage by 5% through writing over 10,000 lines of test code.
-                    </li>
-                    </ul>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}> Jul 2024 – Present</p>
-            </motion.div>
-
-            {/* --- Timeline Item 2 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem", // Adjusted to align the dot center with the line
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-                Success Factors Next Gen Payroll
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-            <i>Scholar@SAP</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-               <ul>
-
-             <li>Worked on backend (Java, SpringBoot), Frontend (Freestyle Fiori) and Microservices (Eureka).</li>
-             <li>Solved 10+ UI Accessibility defects.</li>
-             <li>Worked on verification of status and scope using Java, and tested through JUnits and Mockito.</li>
-
-               </ul>
-                
-                </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>Jan 2024- Jun 2024</p>
-            </motion.div>
-
-            {/* --- Timeline Item 3 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem", // Adjusted to align the dot center with the line
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-                UX Engineering- SAP FIORI V2
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                <i>Scholar@SAP</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-               <ul>
-                <li>Worked on 40+ incidents (internal and customer) on BCP/IMS tool and Service now.</li>
-                <li>Developed understanding on working of Fiori Elements Framework, tech apps, XML templating, Message Handling, Side Effects, IAppState Handling, MVC Protocol and various Annotations.</li>
-                <li>Connected various customers of Germany, USA, China via teams call.</li>
-               </ul>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>Jun 2023- Dec 2023</p>
-            </motion.div>
-
-            {/* --- Timeline Item 4 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem",
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-                Digital Vehicle Operations
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                <i>Scholar@SAP</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-                <ul>
-                  <li>Implemented and deployed Bookshop application and a Quotation application on HANA Trial with CRUD operations using CAP JAVA, including object page implementation with Fiori annotations.</li>
-                  <li>Designed object page using Fiori annotations for sales order entity, and deployed it in SQLite database.</li>
-                  <li>Explored and implemented audit logging, including analysis and understanding of model, auditlogger, and service file.</li>
-                  <li>Implementing Validations using Java, and tested through Junits and Mockito.</li>
-                </ul>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              Sept 2022- May 2023
-              </p>
-            </motion.div>
-
-            {/* --- Timeline Item 5 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem",
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-                Shriram Pistons & Rings Ltd 
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                <i>Internship -Business Applications in Java</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              <ul>
-                <li>Developed backend functionalities using Java and JDBC for seamless database connectivity and interaction.</li>
-                <li>Designed and implemented database schemas, ensuring efficiency and reliability in data management.
-                </li>
-              </ul>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              Jul 2021- Sep 2021
-              </p>
-            </motion.div>
-
-            {/* --- Timeline Item 6 --- */}
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                background: "rgba(255,255,255,0.05)",
-                boxShadow: "0 0 15px rgba(0,255,200,0.2)",
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "relative",
-                marginBottom: "2rem",
-                padding: "1rem 1.5rem",
-                borderRadius: "12px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-1.6rem",
-                  top: "0.5rem",
-                  width: "1rem",
-                  height: "1rem",
-                  background: "var(--accent)",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 10px rgba(0,255,200,0.5)",
-                }}
-              ></div>
-              <h4
-                style={{
-                  color: "var(--accent)",
-                  marginBottom: "0.4rem",
-                  fontSize: "1.25rem",
-                }}
-              >
-                QA-Solvers
-              </h4>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                <i>Internship -Subject Matter Expert</i>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              <ul>
-                <li>Created 90+ doubt solving videos on Web Development, Python, Java, MySQL (For bartleby).
-                </li>
-                <li>Created 10+ doubt solving videos for class 9th and 10th Maths (For Vedantu)</li>
-              </ul>
-              </p>
-              <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              Jul 2020- Oct 2020
-              </p>
-            </motion.div>
+      <div className="work-layout">
+        <aside className="work-console">
+          <Building2 size={26} />
+          <h2>SAP Labs India</h2>
+          <p>
+            Current focus: procurement master data, validations, upload flows,
+            Angular modernization, Fiori polish, and reliability.
+          </p>
+          <div className="console-line">
+            <Code2 size={16} />
+            <span>Java + Spring Boot + UI5 + Angular</span>
           </div>
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
+        </aside>
 
-export default AboutMe;
+        <div className="timeline">
+          {experiences.map((experience, index) => (
+            <motion.article
+              className="timeline-item work-item"
+              key={`${experience.title}-${experience.period}`}
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <span className="timeline-meta">{experience.period}</span>
+              <h2>{experience.title}</h2>
+              <h3>{experience.role}</h3>
+              <ul>
+                {experience.bullets.map((bullet) => (
+                  <li key={bullet}>
+                    <CheckCircle2 size={16} />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  );
+}

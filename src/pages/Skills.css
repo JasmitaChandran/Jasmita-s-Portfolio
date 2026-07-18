@@ -1,103 +1,201 @@
-/* ---------- Header: smaller, left-aligned, no big gaps ---------- */
-.skills-header {
-  text-align: left;        /* align header to left */
-  margin: 10px 0 12px 4%;     /* remove big top/bottom gaps, small left offset to match orbs */
-  padding: 0;
-  max-width: calc(100% - 8%); 
+.skills-container {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 82px 0;
 }
 
-.skills-header h2 {
-  font-size: 1.25rem;      /* smaller title */
-  color: #00ffe0;
-  font-weight: 600;
-  margin: 0;               /* remove default margin so there's no extra gap */
-  line-height: 1.05;
-}
-
-.underline {
-  width: 60px;
-  height: 2px;
-  background: #00ffe0;
-  margin: 6px 0 8px 0;     /* left aligned under title */
-}
-
-/* subtitle (small & tight) */
-.skills-header p {
-  color: #b0b0b0;
-  font-size: 0.95rem;
-  margin: 0;
-  padding: 0;
-}
-
-/* ---------- Orb area: narrower margins and reduced height ---------- */
-.skills-stage {
+.skill-lab {
   position: relative;
-  width: 94%;              /* slightly wider so less left/right margin */
-  max-width: 1200px;
-  height: 360px;           /* reduced height (change this number to your exact preference) */
-  margin: 20px auto;       /* small vertical gap only */
-  border-radius: 14px;
-  background: radial-gradient(circle at 50% 50%, #080808, #0f0f0f);
-  box-shadow: inset 0 0 40px rgba(0, 255, 255, 0.08);
+  height: 520px;
+  margin: 26px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(55, 224, 195, 0.08), transparent 34%),
+    linear-gradient(270deg, rgba(255, 122, 89, 0.08), transparent 34%),
+    rgba(255, 255, 255, 0.045);
+  box-shadow: var(--shadow);
 }
 
-/* Shrink the orbs themselves (logo + text) without touching skill-table */
-.skill-circle {
+.skill-lab::before,
+.skill-lab::after {
+  content: "";
   position: absolute;
-  width: 68px;             /* smaller orb */
-  height: 68px;            /* smaller orb */
+  left: 50%;
+  top: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.13);
   border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 255, 255, 0.04);
-  border: 1px solid rgba(0, 255, 255, 0.18);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transform: translate(-50%, -50%);
 }
 
-.skill-circle img {
-  width: 28px;             /* smaller icon */
-  height: 28px;
-  margin-bottom: 2px;      /* very small gap */
-  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.36)) brightness(1.1);
+.skill-lab::before {
+  width: 330px;
+  height: 330px;
 }
 
-.skill-circle span {
-  font-size: 10px;         /* smaller label */
-  color: rgba(180, 255, 255, 0.9);
-  line-height: 1;
-  margin: 0;
-  padding: 0;
+.skill-lab::after {
+  width: 480px;
+  height: 480px;
 }
 
-/* ---------- Ensure bottom skill boxes are unchanged ---------- */
-/* Keep your existing styles for .skills-table, .skills-row, .skill-box */
-/* (if you previously had them, they remain valid and won't be impacted) */
+.orbit-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: 172px;
+  height: 172px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  border: 1px solid rgba(55, 224, 195, 0.34);
+  border-radius: 50%;
+  background: rgba(8, 10, 13, 0.86);
+  color: var(--text);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+}
 
-/* Example: if needed, re-declare to ensure no inherited changes */
+.orbit-core strong {
+  font-size: 1.2rem;
+}
+
+.orbit-core span {
+  width: min-content;
+  min-width: 124px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.skill-orbit-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 118px;
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+  gap: 7px;
+  padding: 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(10, 12, 17, 0.88);
+  color: var(--soft);
+  text-align: center;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius))
+    rotate(calc(var(--angle) * -1));
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.skill-orbit-item:hover {
+  border-color: rgba(55, 224, 195, 0.55);
+  background: rgba(55, 224, 195, 0.11);
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius))
+    rotate(calc(var(--angle) * -1)) scale(1.06);
+}
+
+.skill-orbit-item img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.skill-orbit-item span {
+  max-width: 96px;
+  color: var(--soft);
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
 .skills-table {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.skills-row {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .skill-box {
-  background: linear-gradient(145deg, #080808 0%, #0f0f0f 100%);
-  border: 1px solid rgba(0, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 18px 22px;
-  width: 300px;
-  text-align: left;
+  padding: 20px;
+}
+
+.skill-box h2 {
+  margin: 14px 0 12px;
+  font-size: 1.05rem;
+}
+
+.skill-box ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-box li {
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .skills-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-lab {
+    height: 470px;
+  }
+
+  .skill-orbit-item {
+    --radius: 175px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .skills-container {
+    width: min(100% - 24px, 1180px);
+    padding: 54px 0;
+  }
+
+  .skill-lab {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .skill-lab::before,
+  .skill-lab::after {
+    display: none;
+  }
+
+  .orbit-core {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    min-height: 108px;
+    grid-column: 1 / -1;
+    border-radius: 8px;
+    transform: none;
+  }
+
+  .skill-orbit-item,
+  .skill-orbit-item:hover {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    min-height: 92px;
+    transform: none;
+  }
+
+  .skills-table {
+    grid-template-columns: 1fr;
+  }
 }
