@@ -136,8 +136,6 @@ export default function Home() {
           >
             <div className="portrait-shell">
               <img src="/photo.jpg" alt="Jasmita Chandran" />
-              <div className="portrait-tag top">open to bold builds</div>
-              <div className="portrait-tag bottom">ship. learn. lead.</div>
             </div>
             <div className="code-card" aria-label="Developer profile summary">
               <span className="code-dot red" />

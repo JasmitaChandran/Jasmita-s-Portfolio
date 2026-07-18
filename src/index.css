@@ -376,8 +376,8 @@ img {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(340px, 0.94fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(520px, 1.05fr);
+  gap: 42px;
   align-items: center;
 }
 
@@ -442,13 +442,22 @@ img {
 .hero-visual {
   position: relative;
   z-index: 2;
-  min-height: 560px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "portrait"
+    "terminal";
+  justify-self: end;
+  justify-items: center;
+  align-items: start;
+  gap: 18px;
+  width: min(100%, 640px);
+  min-height: 0;
 }
 
 .portrait-shell {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
+  grid-area: portrait;
   width: min(430px, 100%);
   aspect-ratio: 0.82;
   border: 1px solid var(--line);
@@ -456,7 +465,7 @@ img {
   overflow: hidden;
   background: var(--panel-strong);
   box-shadow: var(--shadow);
-  transform: rotate(1.5deg);
+  transform: none;
 }
 
 .portrait-shell::after {
@@ -473,37 +482,10 @@ img {
   object-fit: cover;
 }
 
-.portrait-tag {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: center;
-  padding: 9px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(8, 9, 14, 0.72);
-  color: var(--soft);
-  font-size: 0.76rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  backdrop-filter: blur(12px);
-}
-
-.portrait-tag.top {
-  top: 16px;
-}
-
-.portrait-tag.bottom {
-  bottom: 16px;
-}
-
 .code-card {
-  position: absolute;
-  left: 0;
-  bottom: 20px;
-  width: min(360px, 88%);
+  position: relative;
+  grid-area: terminal;
+  width: min(100%, 620px);
   padding: 18px;
   border: 1px solid rgba(55, 224, 195, 0.28);
   border-radius: 8px;
@@ -536,8 +518,9 @@ img {
   margin: 14px 0 0;
   color: #cbf7ef;
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.84rem;
-  white-space: pre-wrap;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 .home-snapshot {
@@ -1039,18 +1022,22 @@ img {
   }
 
   .hero-visual {
-    min-height: 520px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "portrait"
+      "terminal";
+    justify-items: center;
+    gap: 18px;
+    padding-right: 0;
   }
 
   .portrait-shell {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) rotate(1deg);
+    width: min(430px, 100%);
+    transform: none;
   }
 
   .code-card {
-    left: 50%;
-    transform: translateX(-50%);
+    width: min(100%, 620px);
   }
 
   .education-intro,
@@ -1156,7 +1143,7 @@ img {
   }
 
   .hero-visual {
-    min-height: 460px;
+    gap: 16px;
   }
 
   .portrait-shell {
@@ -1164,8 +1151,7 @@ img {
   }
 
   .code-card {
-    bottom: 0;
-    width: min(330px, 94%);
+    width: min(100%, 360px);
   }
 
   .metrics-strip,
