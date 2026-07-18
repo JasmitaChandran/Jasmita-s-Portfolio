@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -18,16 +18,9 @@ import {
   Trophy,
 } from "lucide-react";
 
-const techStack = [
-  "Java",
-  "Spring Boot",
-  "JavaScript",
-  "React",
-  "SAP UI5",
-  "Microservices",
-  "SQL",
-  "SAP BTP",
-];
+const DeveloperConstellation = React.lazy(() =>
+  import("../components/DeveloperConstellation")
+);
 
 const highlights = [
   {
@@ -103,6 +96,9 @@ export default function Home() {
   return (
     <main className="home-page">
       <section className="hero-lab">
+        <Suspense fallback={null}>
+          <DeveloperConstellation />
+        </Suspense>
         <div className="hero-grid">
           <motion.div
             className="hero-copy"
@@ -112,13 +108,11 @@ export default function Home() {
           >
             <span className="section-kicker">
               <Sparkles size={16} />
-              Java, SAP and full stack craft
+              Full-Stack Developer
             </span>
             <h1>Jasmita Chandran</h1>
             <p className="hero-subtitle">
-              I build enterprise-grade systems with a creative edge: reliable
-              backend services, thoughtful user interfaces, and AI-powered
-              experiments that solve real problems.
+              Full-stack developer with strong expertise in Java and Spring Boot. Passionate about backend development while also experienced in frontend.
             </p>
 
             <div className="hero-actions">
@@ -132,11 +126,6 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="tech-marquee" aria-label="Technology stack">
-              {[...techStack, ...techStack].map((item, index) => (
-                <span key={`${item}-${index}`}>{item}</span>
-              ))}
-            </div>
           </motion.div>
 
           <motion.div
@@ -154,10 +143,10 @@ export default function Home() {
               <span className="code-dot red" />
               <span className="code-dot amber" />
               <span className="code-dot green" />
-              <pre>{`const jasmita = {
-  craft: "full-stack",
-  mode: "builder + speaker",
-  stack: ["Java", "React", "SAP"]
+              <pre>{`public class Jasmita {
+    public static void main(String[] args) {
+        System.out.println("Hello, Recruiters!");
+    }
 }`}</pre>
             </div>
           </motion.div>

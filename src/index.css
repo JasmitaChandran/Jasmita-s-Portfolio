@@ -320,26 +320,59 @@ img {
 
 .hero-lab {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: calc(100vh - 76px);
   display: grid;
   align-items: center;
   padding: 58px 0 70px;
+  background:
+    radial-gradient(circle at 76% 38%, rgba(55, 224, 195, 0.14), transparent 32%),
+    radial-gradient(circle at 88% 64%, rgba(255, 122, 89, 0.13), transparent 28%);
 }
 
 .hero-lab::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(55, 224, 195, 0.08), transparent 28%),
-    linear-gradient(270deg, rgba(255, 122, 89, 0.08), transparent 28%);
+    linear-gradient(90deg, rgba(8, 9, 14, 0.98) 0%, rgba(8, 9, 14, 0.72) 42%, rgba(8, 9, 14, 0.18) 100%),
+    linear-gradient(180deg, rgba(8, 9, 14, 0.05), rgba(8, 9, 14, 0.62));
   mask-image: linear-gradient(to bottom, black 70%, transparent);
+}
+
+.hero-lab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, transparent 0, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 86px 86px;
+  opacity: 0.42;
+}
+
+.hero-three-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  min-height: 100%;
+  pointer-events: none;
+}
+
+.developer-constellation-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .hero-grid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   display: grid;
@@ -348,17 +381,27 @@ img {
   align-items: center;
 }
 
+.hero-copy,
+.hero-visual {
+  min-width: 0;
+}
+
 .hero-copy h1 {
-  max-width: 720px;
-  font-size: clamp(3.4rem, 9vw, 7.8rem);
-  line-height: 0.86;
+  max-width: 690px;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  line-height: 1;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .hero-subtitle {
   max-width: 650px;
-  margin: 24px 0 0;
+  margin: 22px 0 0;
   color: var(--soft);
-  font-size: clamp(1.04rem, 1.8vw, 1.34rem);
+  font-size: clamp(1.08rem, 1.55vw, 1.36rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
 }
 
 .hero-actions {
@@ -398,6 +441,7 @@ img {
 
 .hero-visual {
   position: relative;
+  z-index: 2;
   min-height: 560px;
 }
 
@@ -1030,12 +1074,14 @@ img {
 @media (max-width: 720px) {
   .page-shell,
   .container {
-    width: min(100% - 24px, 1180px);
+    width: calc(100% - 24px);
+    max-width: 1180px;
     padding: 54px 0;
   }
 
   .footer {
-    width: min(100% - 24px, 1180px);
+    width: calc(100% - 24px);
+    max-width: 1180px;
     flex-direction: column;
   }
 
@@ -1048,7 +1094,8 @@ img {
   }
 
   .nav {
-    width: min(100% - 16px, 1240px);
+    width: calc(100% - 16px);
+    max-width: 1240px;
     margin-top: 8px;
   }
 
@@ -1060,20 +1107,52 @@ img {
   .hero-lab {
     min-height: auto;
     padding: 48px 0 38px;
+    background:
+      radial-gradient(circle at 50% 34%, rgba(55, 224, 195, 0.16), transparent 42%),
+      radial-gradient(circle at 68% 70%, rgba(255, 122, 89, 0.1), transparent 34%);
+  }
+
+  .hero-lab::before {
+    background:
+      linear-gradient(180deg, rgba(8, 9, 14, 0.9) 0%, rgba(8, 9, 14, 0.74) 48%, rgba(8, 9, 14, 0.56) 100%),
+      linear-gradient(90deg, rgba(8, 9, 14, 0.82), rgba(8, 9, 14, 0.3));
+  }
+
+  .hero-three-scene {
+    height: 640px;
+    opacity: 0.82;
   }
 
   .hero-grid {
-    width: min(100% - 24px, 1180px);
+    width: auto;
+    max-width: 1180px;
+    margin: 0 12px;
     gap: 28px;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
   }
 
   .hero-copy h1 {
-    font-size: clamp(3rem, 18vw, 4.8rem);
+    max-width: 100%;
+    font-size: clamp(2.05rem, 9vw, 2.7rem);
+    line-height: 1.06;
   }
 
-  .hero-actions,
-  .button {
+  .hero-subtitle {
+    max-width: 100%;
+    margin-top: 18px;
+    font-size: clamp(1rem, 4.5vw, 1.24rem);
+    line-height: 1.62;
+  }
+
+  .hero-actions {
     width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-actions .button {
+    width: min(100%, 330px);
   }
 
   .hero-visual {
