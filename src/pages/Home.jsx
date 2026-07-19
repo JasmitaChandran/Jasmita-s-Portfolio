@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
+  BarChart3,
   BriefcaseBusiness,
   Code2,
   Database,
@@ -106,36 +106,61 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="hero-profile">
-              <div className="portrait-shell">
-                <img src="/photo.jpg" alt="Jasmita Chandran" />
-              </div>
-
-              <div className="hero-text">
+            <div className="hero-left-panel">
+              <div className="hero-title-block">
                 <span className="section-kicker">
                   <Sparkles size={16} />
                   Full-Stack Developer
                 </span>
-                <h1>Jasmita Chandran</h1>
-                <p className="hero-subtitle">
-                  Full-stack developer with strong expertise in Java and Spring
-                  Boot. Passionate about backend development while also
-                  experienced in frontend.
+                <h1>
+                  <span>Jasmita</span>
+                  <span>Chandran</span>
+                </h1>
+                <p className="hero-stack-line">
+                  Java / Spring Boot / Backend Systems
                 </p>
+              </div>
 
-                <div className="hero-actions">
-                  <Link className="button primary" to="/projects">
-                    <Rocket size={18} />
-                    View Projects
-                  </Link>
-                  <a className="button ghost" href="/resume.pdf" download>
-                    Resume
-                    <ArrowUpRight size={17} />
-                  </a>
+              <div className="hero-profile">
+                <div className="portrait-shell">
+                  <img src="/photo.jpg" alt="Jasmita Chandran" />
+                </div>
+
+                <div className="hero-text">
+                  <span className="mini-title">About Me</span>
+                  <p className="hero-subtitle">
+                    Full-stack developer with strong expertise in Java and
+                    Spring Boot. Passionate about backend development while also
+                    experienced in frontend.
+                  </p>
+
+                  <div className="hero-actions">
+                    <Link className="button primary" to="/projects">
+                      <Rocket size={18} />
+                      View Projects
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
 
+              <div className="hero-highlight-strip" aria-label="Experience highlights">
+                <span>
+                  <Code2 size={18} />
+                  <strong>2+</strong>
+                  Years Coding
+                </span>
+                <span>
+                  <BarChart3 size={18} />
+                  <strong>10+</strong>
+                  Projects Built
+                </span>
+                <span>
+                  <Layers3 size={18} />
+                  <strong>5+</strong>
+                  Technologies
+                </span>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -144,6 +169,12 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
+            <span className="hero-float-badge badge-api">{`{ REST API }`}</span>
+            <span className="hero-float-badge badge-code">
+              <Code2 size={16} />
+              Code
+            </span>
+            <span className="hero-float-badge badge-spring">Spring Boot</span>
             <div className="code-card" aria-label="Developer profile summary">
               <div className="terminal-bar">
                 <div className="terminal-dots" aria-hidden="true">
@@ -154,14 +185,35 @@ export default function Home() {
                 <span>portfolio.java</span>
                 <strong>running</strong>
               </div>
-              <pre>{`public class Jasmita {
-  String craft = "Java + Spring Boot";
-  String focus = "Backend systems";
-
-  void build() {
-    ship("APIs", "React UI", "SAP apps");
-  }
-}`}</pre>
+              <div className="code-lines" aria-hidden="true">
+                <p>
+                  <span className="code-purple">public class</span>{" "}
+                  <span className="code-green">Jasmita</span> {"{"}
+                </p>
+                <p>
+                  <span className="code-purple">String</span>{" "}
+                  <span className="code-amber">craft</span> ={" "}
+                  <span className="code-green">"Java + Spring Boot"</span>;
+                </p>
+                <p>
+                  <span className="code-purple">String</span>{" "}
+                  <span className="code-amber">focus</span> ={" "}
+                  <span className="code-green">"Backend systems"</span>;
+                </p>
+                <p className="code-gap">
+                  <span className="code-purple">void</span>{" "}
+                  <span className="code-amber">build</span>() {"{"}
+                </p>
+                <p>
+                  ship(
+                  <span className="code-green">"APIs"</span>,{" "}
+                  <span className="code-green">"React UI"</span>,{" "}
+                  <span className="code-green">"SAP apps"</span>);
+                </p>
+                <p>{"}"}</p>
+                <p>{"}"}</p>
+              </div>
+              <div className="terminal-status">Building scalable solutions..._</div>
             </div>
           </motion.div>
         </div>

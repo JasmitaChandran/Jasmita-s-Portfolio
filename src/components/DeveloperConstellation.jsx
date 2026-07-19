@@ -30,10 +30,8 @@ const nodeLabels = [
   "Java",
   "React",
   "SAP",
-  "SQL",
   "APIs",
-  "UI5",
-  "Tests",
+  "Spring",
   "Cloud",
 ];
 
@@ -46,8 +44,8 @@ function createLabelTexture(text) {
   canvas.width = width;
   canvas.height = height;
   context.clearRect(0, 0, width, height);
-  context.fillStyle = "rgba(8, 10, 13, 0.72)";
-  context.strokeStyle = "rgba(55, 224, 195, 0.62)";
+  context.fillStyle = "rgba(8, 10, 13, 0.38)";
+  context.strokeStyle = "rgba(55, 224, 195, 0.3)";
   context.lineWidth = 3;
   context.beginPath();
   if (context.roundRect) {
@@ -57,10 +55,10 @@ function createLabelTexture(text) {
   }
   context.fill();
   context.stroke();
-  context.font = "700 30px Inter, system-ui, sans-serif";
+  context.font = "700 25px Inter, system-ui, sans-serif";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  context.fillStyle = "#f6f8fb";
+  context.fillStyle = "rgba(203, 247, 239, 0.66)";
   context.fillText(text, width / 2, height / 2 + 1);
 
   const texture = new CanvasTexture(canvas);
@@ -205,11 +203,12 @@ export default function DeveloperConstellation() {
         new SpriteMaterial({
           map: createLabelTexture(label),
           transparent: true,
+          opacity: 0.5,
           depthWrite: false,
         })
       );
       labelSprite.position.set(0, 0.34, 0);
-      labelSprite.scale.set(0.82, 0.31, 1);
+      labelSprite.scale.set(0.68, 0.26, 1);
       nodeGroup.add(labelSprite);
 
       const lineGeometry = new BufferGeometry().setFromPoints([
@@ -240,7 +239,7 @@ export default function DeveloperConstellation() {
         color: 0xd9dee7,
         size: 0.018,
         transparent: true,
-        opacity: 0.62,
+        opacity: 0.48,
         depthWrite: false,
       })
     );
@@ -260,6 +259,9 @@ export default function DeveloperConstellation() {
       renderer.setSize(canvasWidth, canvasHeight, false);
       camera.aspect = canvasWidth / canvasHeight;
       camera.position.z = canvasWidth < 720 ? 8.4 : 7.2;
+      rig.position.x = canvasWidth < 900 ? 0.2 : 1.45;
+      rig.position.y = canvasWidth < 900 ? -0.25 : -0.08;
+      rig.scale.setScalar(canvasWidth < 900 ? 0.86 : 1);
       camera.updateProjectionMatrix();
     };
 
