@@ -32,7 +32,7 @@ export default function App() {
       </main>
       <footer className="footer">
         <strong>Jasmita Chandran</strong>
-        <span>Built with React, motion, and a lot of curiosity. {new Date().getFullYear()}</span>
+        <span> Session Started at : {new Date().toLocaleDateString('en-GB')} {new Date().toLocaleTimeString('en-US', { hour12: true })}</span>
       </footer>
     </div>
   )

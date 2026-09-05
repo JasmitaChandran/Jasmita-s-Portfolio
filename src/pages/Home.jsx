@@ -82,7 +82,7 @@ export default function Home() {
 
     setTerminalHistory((currentHistory) => [
       ...currentHistory,
-      { type: "command", lines: [`visitor@portfolio ~ % ${rawCommand}`] },
+      { type: "command", lines: [`jasmita@portfolio ~ % ${rawCommand}`] },
       { type: command in terminalCommands ? "response" : "error", lines: response },
     ]);
     setTerminalInput("");
@@ -183,7 +183,7 @@ export default function Home() {
               <span className="terminal-dot amber" />
               <span className="terminal-dot green" />
             </div>
-            <span>jasmita@portfolio: ~/craft</span>
+            <span>jasmita@portfolio: ~/resume</span>
             <strong>interactive</strong>
           </div>
 
@@ -199,7 +199,7 @@ export default function Home() {
           </div>
 
           <form className="terminal-input-row" onSubmit={handleTerminalSubmit}>
-            <span aria-hidden="true">visitor@portfolio ~ %</span>
+            <span aria-hidden="true">jasmita@portfolio ~ %</span>
             <input
               aria-label="Terminal command"
               autoComplete="off"
