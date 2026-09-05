@@ -152,7 +152,7 @@ export default function Home() {
                 <span>
                   <BarChart3 size={18} />
                   <span className="hero-highlight-copy">
-                    <small>Base</small>
+                    <small>Location</small>
                     <strong>New Delhi</strong>
                   </span>
                 </span>
