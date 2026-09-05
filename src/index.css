@@ -408,7 +408,7 @@ img {
 .hero-left-panel::before {
   content: "";
   position: absolute;
-  left: -18px;
+  left: clamp(-64px, calc(109.5px - 12vw), -26px);
   top: 20%;
   bottom: 8%;
   width: 1px;
