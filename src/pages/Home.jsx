@@ -1,98 +1,98 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   BarChart3,
-  BriefcaseBusiness,
   Code2,
-  Database,
-  Github,
-  Instagram,
   Layers3,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageCircle,
   Rocket,
   Sparkles,
-  Trophy,
 } from "lucide-react";
 
 const DeveloperConstellation = React.lazy(() =>
   import("../components/DeveloperConstellation")
 );
 
-const highlights = [
+const terminalCommands = {
+  help: [
+    "Commands: about, skills, projects, impact, contact, clear",
+    "Example: type skills and press Enter.",
+  ],
+  about: [
+    "Jasmita Chandran",
+    "Software Developer at SAP Labs India.",
+    "Full-stack developer focused on Java, Spring Boot, backend systems, and thoughtful frontend experiences.",
+  ],
+  skills: [
+    "Backend: Java, Spring Boot, REST APIs, Microservices",
+    "Frontend: React, SAP UI5, Angular, accessible UI",
+    "Quality: JUnit, debugging, validations, data contracts",
+  ],
+  projects: [
+    "Built enterprise-grade API and UI work across SAP-focused systems.",
+    "Explored AI-powered products, document chat, profiling tools, and healthcare ML ideas.",
+  ],
+  impact: [
+    "16 inbound entities delivered.",
+    "30+ defects resolved across UI and backend.",
+    "10k+ JUnit test lines added.",
+  ],
+  contact: [
+    "GitHub: github.com/JasmitaChandran",
+    "LinkedIn: linkedin.com/in/jasmita-chandran",
+    "Email: jasmitachandran24@gmail.com",
+  ],
+};
+
+const initialTerminalHistory = [
   {
-    icon: BriefcaseBusiness,
-    label: "Current Role",
-    value: "Associate Developer at SAP Labs India",
-  },
-  {
-    icon: Trophy,
-    label: "Impact",
-    value: "Trainer, speaker, athlete, and builder",
-  },
-  {
-    icon: MapPin,
-    label: "Base",
-    value: "New Delhi, India",
+    type: "system",
+    lines: [
+      "JasmitaOS v1.0 initialized.",
+      "Type help, about, skills, projects, impact, or contact.",
+    ],
   },
 ];
 
-const metrics = [
-  { value: "16", label: "Inbound entities delivered" },
-  { value: "30+", label: "Defects resolved across UI and backend" },
-  { value: "10k+", label: "JUnit test lines added" },
-];
-
-const socialLinks = [
-  {
-    icon: Github,
-    title: "GitHub",
-    link: "https://github.com/JasmitaChandran",
-  },
-  {
-    icon: Linkedin,
-    title: "LinkedIn",
-    link: "https://www.linkedin.com/in/jasmita-chandran/",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    link: "mailto:jasmitachandran24@gmail.com",
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp",
-    link: "https://wa.me/+917303655829",
-  },
-  {
-    icon: Instagram,
-    title: "Instagram",
-    link: "https://www.instagram.com/jasmitachandran/",
-  },
-];
-
-const craftCards = [
-  {
-    icon: Code2,
-    title: "Backend Systems",
-    text: "Java, Spring Boot, validations, APIs, data contracts, and reliability work.",
-  },
-  {
-    icon: Layers3,
-    title: "Enterprise UI",
-    text: "SAP Fiori/UI5, Angular, React, accessibility fixes, and polished interaction states.",
-  },
-  {
-    icon: Database,
-    title: "Data Products",
-    text: "AI experiments, profiling tools, document chat, and healthcare-focused ML ideas.",
-  },
-];
+const quickCommands = ["about", "skills", "projects", "impact", "contact"];
 
 export default function Home() {
+  const [terminalInput, setTerminalInput] = useState("");
+  const [terminalHistory, setTerminalHistory] = useState(initialTerminalHistory);
+  const terminalEndRef = useRef(null);
+
+  useEffect(() => {
+    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [terminalHistory]);
+
+  const runTerminalCommand = (rawCommand) => {
+    const command = rawCommand.trim().toLowerCase();
+    if (!command) return;
+
+    if (command === "clear") {
+      setTerminalHistory(initialTerminalHistory);
+      setTerminalInput("");
+      return;
+    }
+
+    const response = terminalCommands[command] || [
+      `Command not found: ${rawCommand}`,
+      "Run help to see available commands.",
+    ];
+
+    setTerminalHistory((currentHistory) => [
+      ...currentHistory,
+      { type: "command", lines: [`visitor@portfolio ~ % ${rawCommand}`] },
+      { type: command in terminalCommands ? "response" : "error", lines: response },
+    ]);
+    setTerminalInput("");
+  };
+
+  const handleTerminalSubmit = (event) => {
+    event.preventDefault();
+    runTerminalCommand(terminalInput);
+  };
+
   return (
     <main className="home-page">
       <section className="hero-lab">
@@ -116,9 +116,7 @@ export default function Home() {
                   <span>Jasmita</span>
                   <span>Chandran</span>
                 </h1>
-                <p className="hero-stack-line">
-                  Java / Spring Boot / Backend Systems
-                </p>
+                <pre className="hero-stack-line"> Software Developer at SAP Labs India</pre>
               </div>
 
               <div className="hero-profile">
@@ -146,146 +144,84 @@ export default function Home() {
               <div className="hero-highlight-strip" aria-label="Experience highlights">
                 <span>
                   <Code2 size={18} />
-                  <strong>2+</strong>
-                  Years Coding
+                  <span className="hero-highlight-copy">
+                    <small>Experience</small>
+                    <strong>4+ Years</strong>
+                  </span>
                 </span>
                 <span>
                   <BarChart3 size={18} />
-                  <strong>10+</strong>
-                  Projects Built
+                  <span className="hero-highlight-copy">
+                    <small>Base</small>
+                    <strong>New Delhi</strong>
+                  </span>
                 </span>
                 <span>
                   <Layers3 size={18} />
-                  <strong>5+</strong>
-                  Technologies
+                  <span className="hero-highlight-copy">
+                    <small>Current Role</small>
+                    <strong>Associate Developer</strong>
+                  </span>
                 </span>
               </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="hero-visual"
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-          >
-            <span className="hero-float-badge badge-api">{`{ REST API }`}</span>
-            <span className="hero-float-badge badge-code">
-              <Code2 size={16} />
-              Code
-            </span>
-            <span className="hero-float-badge badge-spring">Spring Boot</span>
-            <div className="code-card" aria-label="Developer profile summary">
-              <div className="terminal-bar">
-                <div className="terminal-dots" aria-hidden="true">
-                  <span className="code-dot red" />
-                  <span className="code-dot amber" />
-                  <span className="code-dot green" />
-                </div>
-                <span>portfolio.java</span>
-                <strong>running</strong>
-              </div>
-              <div className="code-lines" aria-hidden="true">
-                <p>
-                  <span className="code-purple">public class</span>{" "}
-                  <span className="code-green">Jasmita</span> {"{"}
-                </p>
-                <p>
-                  <span className="code-purple">String</span>{" "}
-                  <span className="code-amber">craft</span> ={" "}
-                  <span className="code-green">"Java + Spring Boot"</span>;
-                </p>
-                <p>
-                  <span className="code-purple">String</span>{" "}
-                  <span className="code-amber">focus</span> ={" "}
-                  <span className="code-green">"Backend systems"</span>;
-                </p>
-                <p className="code-gap">
-                  <span className="code-purple">void</span>{" "}
-                  <span className="code-amber">build</span>() {"{"}
-                </p>
-                <p>
-                  ship(
-                  <span className="code-green">"APIs"</span>,{" "}
-                  <span className="code-green">"React UI"</span>,{" "}
-                  <span className="code-green">"SAP apps"</span>);
-                </p>
-                <p>{"}"}</p>
-                <p>{"}"}</p>
-              </div>
-              <div className="terminal-status">Building scalable solutions..._</div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="home-snapshot page-shell">
-        <div className="metrics-strip">
-          {metrics.map((metric) => (
-            <div className="metric-card" key={metric.label}>
-              <strong>{metric.value}</strong>
-              <span>{metric.label}</span>
+      <section className="home-terminal-section page-shell">
+        <motion.div
+          className="interactive-terminal"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.28 }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="terminal-topbar">
+            <div className="terminal-dots" aria-hidden="true">
+              <span className="terminal-dot red" />
+              <span className="terminal-dot amber" />
+              <span className="terminal-dot green" />
             </div>
-          ))}
-        </div>
-
-        <div className="split-section">
-          <div>
-            <span className="section-kicker">Profile</span>
-            <h2 className="section-title">Engineer with stage energy.</h2>
-            <p className="section-copy">
-              My work sits at the intersection of enterprise development,
-              public speaking, mentoring, sports discipline, and creative
-              execution. I care about systems that are stable under pressure and
-              interfaces that feel effortless to use.
-            </p>
+            <span>jasmita@portfolio: ~/craft</span>
+            <strong>interactive</strong>
           </div>
 
-          <div className="highlight-grid">
-            {highlights.map(({ icon: Icon, label, value }) => (
-              <motion.article
-                className="highlight-card"
-                key={label}
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 240, damping: 20 }}
+          <div className="terminal-screen" aria-live="polite">
+            {terminalHistory.map((entry, entryIndex) => (
+              <div className={`terminal-line ${entry.type}`} key={`${entry.type}-${entryIndex}`}>
+                {entry.lines.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+            ))}
+            <div ref={terminalEndRef} />
+          </div>
+
+          <form className="terminal-input-row" onSubmit={handleTerminalSubmit}>
+            <span aria-hidden="true">visitor@portfolio ~ %</span>
+            <input
+              aria-label="Terminal command"
+              autoComplete="off"
+              spellCheck="false"
+              value={terminalInput}
+              onChange={(event) => setTerminalInput(event.target.value)}
+            />
+            <button type="submit">Run</button>
+          </form>
+
+          <div className="terminal-command-row" aria-label="Quick terminal commands">
+            {quickCommands.map((command) => (
+              <button
+                type="button"
+                key={command}
+                onClick={() => runTerminalCommand(command)}
               >
-                <Icon size={22} />
-                <span>{label}</span>
-                <strong>{value}</strong>
-              </motion.article>
+                {command}
+              </button>
             ))}
           </div>
-        </div>
-
-        <div className="craft-grid">
-          {craftCards.map(({ icon: Icon, title, text }) => (
-            <motion.article
-              className="craft-card"
-              key={title}
-              whileHover={{ y: -8 }}
-              transition={{ type: "spring", stiffness: 220, damping: 18 }}
-            >
-              <Icon size={24} />
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </motion.article>
-          ))}
-        </div>
-
-        <div className="social-dock" aria-label="Social links">
-          {socialLinks.map(({ icon: Icon, title, link }) => (
-            <a
-              href={link}
-              key={title}
-              title={title}
-              aria-label={title}
-              target={link.startsWith("mailto:") ? undefined : "_blank"}
-              rel={link.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-            >
-              <Icon size={21} />
-            </a>
-          ))}
-        </div>
+        </motion.div>
       </section>
     </main>
   );

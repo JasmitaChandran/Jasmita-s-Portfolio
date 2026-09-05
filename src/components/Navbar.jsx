@@ -1,17 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import {
+  BriefcaseBusiness,
+  Braces,
+  FileText,
+  FolderCode,
+  GraduationCap,
+  Home,
+  Mail,
+  Trophy,
+} from "lucide-react";
 
 const links = [
-  { label: "Home", to: "/" },
-  { label: "Education", to: "/about" },
-  { label: "Work", to: "/certificates" },
-  { label: "Skills", to: "/skills" },
-  { label: "Projects", to: "/projects" },
-  { label: "Achievements", to: "/gallery" },
-  { label: "Blog", to: "/blog" },
-  { label: "Resume", to: "/resume" },
-  { label: "Contact", to: "/contact" },
+  { label: "Home", to: "/", icon: Home },
+  { label: "Education", to: "/about", icon: GraduationCap },
+  { label: "Work", to: "/certificates", icon: BriefcaseBusiness },
+  { label: "Skills", to: "/skills", icon: Braces },
+  { label: "Projects", to: "/projects", icon: FolderCode },
+  { label: "Achievements", to: "/gallery", icon: Trophy },
+  { label: "Resume", to: "/resume", icon: FileText },
+  { label: "Contact", to: "/contact", icon: Mail },
 ];
 
 export default function Navbar() {
@@ -33,7 +42,7 @@ export default function Navbar() {
       </NavLink>
 
       <div className="nav-links">
-        {links.map((link) => (
+        {links.map(({ icon: Icon, ...link }) => (
           <NavLink
             key={link.to}
             to={link.to}
@@ -42,6 +51,7 @@ export default function Navbar() {
               `nav-link ${isActive ? "is-active" : ""}`
             }
           >
+            <Icon size={16} strokeWidth={2.3} aria-hidden="true" />
             {link.label}
           </NavLink>
         ))}
