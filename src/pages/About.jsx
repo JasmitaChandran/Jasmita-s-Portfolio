@@ -5,10 +5,17 @@ import { BookOpen, GraduationCap, School, University } from "lucide-react";
 const education = [
   {
     icon: University,
+    title: "MBA - Dual Specialization - DataScience & AI, FinTech",
+    place: "Chandigarh University",
+    meta: "2026 - Present",
+    detail: "Pursuing",
+  },
+  {
+    icon: University,
     title: "M.Tech in Software Engineering",
     place: "BITS Pilani",
-    meta: "2022 - 2026",
-    detail: "4th Year, pursuing with GPA 8.0",
+    meta: "Completed in 2026",
+    detail: "GPA 8.0",
   },
   {
     icon: GraduationCap,
@@ -62,7 +69,7 @@ export default function About() {
           </p>
           <div className="mini-stat">
             <strong>8.0</strong>
-            <span>Current M.Tech GPA</span>
+            <span>M.Tech GPA</span>
           </div>
           <div className="mini-stat">
             <strong>9.56</strong>
