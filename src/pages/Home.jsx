@@ -127,9 +127,7 @@ export default function Home() {
                 <div className="hero-text">
                   <span className="mini-title">About Me</span>
                   <p className="hero-subtitle">
-                    Full-stack developer with strong expertise in Java and
-                    Spring Boot. Passionate about backend development while also
-                    experienced in frontend.
+                    I’m a Full Stack Java Developer specializing in Java, Spring Boot, Microservices, REST APIs, and distributed systems, with hands-on frontend experience in Angular, React, and SAP Fiori/UI5. At SAP Labs, I work on enterprise-scale SAP Ariba applications across backend development, integrations, testing, and production support using technologies including SAP CAP, BTP, HANA, Kafka, Redis, and Docker. I enjoy building scalable systems, debugging complex production problems, and creating full-stack products from idea to deployment.
                   </p>
 
                   <div className="hero-actions">
@@ -137,30 +135,34 @@ export default function Home() {
                       <Rocket size={18} />
                       View Projects
                     </Link>
+                     <Link className="button primary" to="/resume">
+                      <Rocket size={18} />
+                      View Resume
+                    </Link>
                   </div>
                 </div>
               </div>
 
               <div className="hero-highlight-strip" aria-label="Experience highlights">
                 <span>
-                  <Code2 size={18} />
+                  <BarChart3 size={18} />
                   <span className="hero-highlight-copy">
                     <small>Experience</small>
                     <strong>4+ Years</strong>
                   </span>
                 </span>
                 <span>
-                  <BarChart3 size={18} />
+                  <Code2 size={18} />
                   <span className="hero-highlight-copy">
-                    <small>Location</small>
-                    <strong>New Delhi</strong>
+                    <small>Full Stack</small>
+                    <strong>Developer</strong>
                   </span>
                 </span>
                 <span>
                   <Layers3 size={18} />
                   <span className="hero-highlight-copy">
                     <small>Current Role</small>
-                    <strong>Associate Developer</strong>
+                    <strong>SDE-1 at SAP Labs</strong>
                   </span>
                 </span>
               </div>
