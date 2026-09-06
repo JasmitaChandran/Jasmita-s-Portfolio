@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Boxes, Code2, Database, Gauge, Network } from "lucide-react";
 import "./Skills.css";
+import { skillGroups } from "../components/constellationSkills.mjs";
 
 const SKILLS = [
   { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
@@ -18,28 +19,8 @@ const SKILLS = [
   { name: "Postman", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
 ];
 
-const groups = [
-  {
-    icon: Code2,
-    title: "Backend Engineering",
-    items: ["Java", "Spring Boot", "JUnit", "Mockito", "REST APIs"],
-  },
-  {
-    icon: Gauge,
-    title: "Frontend Systems",
-    items: ["React", "Angular", "SAP Fiori/UI5", "Accessibility", "Responsive UI"],
-  },
-  {
-    icon: Network,
-    title: "Architecture and Tools",
-    items: ["Microservices", "Eureka", "Swagger", "Postman", "GitHub"],
-  },
-  {
-    icon: Database,
-    title: "Data Layer",
-    items: ["MySQL", "MongoDB", "SQLite", "CDS Schemas", "Excel-to-JSON"],
-  },
-];
+const groupIcons = [Code2, Gauge, Network, Database];
+const groups = skillGroups.map((group, index) => ({ ...group, icon: groupIcons[index] }));
 
 export default function Skills() {
   return (

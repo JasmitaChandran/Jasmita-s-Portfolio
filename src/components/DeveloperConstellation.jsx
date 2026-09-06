@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { constellationSkills, skillPosition } from "./constellationSkills.mjs";
 import {
   AmbientLight,
   BufferAttribute,
@@ -26,19 +27,11 @@ import {
   WebGLRenderer,
 } from "three";
 
-const nodeLabels = [
-  "Java",
-  "React",
-  "SAP",
-  "APIs",
-  "Spring",
-  "Cloud",
-];
-
 function createLabelTexture(text) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
-  const width = 256;
+  context.font = "700 25px Inter, system-ui, sans-serif";
+  const width = Math.max(180, Math.ceil(context.measureText(text).width) + 72);
   const height = 96;
 
   canvas.width = width;
@@ -58,7 +51,7 @@ function createLabelTexture(text) {
   context.font = "700 25px Inter, system-ui, sans-serif";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  context.fillStyle = "rgba(203, 247, 239, 0.66)";
+  context.fillStyle = "rgba(203, 247, 239, 0.95)";
   context.fillText(text, width / 2, height / 2 + 1);
 
   const texture = new CanvasTexture(canvas);
@@ -171,7 +164,7 @@ export default function DeveloperConstellation() {
     rings[2].rotation.z = Math.PI / 5;
     rings.forEach((ring) => rig.add(ring));
 
-    const nodeGeometry = new SphereGeometry(0.095, 24, 24);
+    const nodeGeometry = new SphereGeometry(0.055, 12, 12);
     const nodeMaterial = new MeshStandardMaterial({
       color: 0xf6f8fb,
       emissive: 0x37e0c3,
@@ -182,33 +175,30 @@ export default function DeveloperConstellation() {
     const lineMaterial = new LineBasicMaterial({
       color: 0x37e0c3,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.09,
     });
 
-    nodeLabels.forEach((label, index) => {
-      const angle = (index / nodeLabels.length) * Math.PI * 2;
-      const radius = index % 2 === 0 ? 2.35 : 3;
-      const y = index % 3 === 0 ? 0.74 : index % 3 === 1 ? -0.6 : 0.08;
-      const x = Math.cos(angle) * radius;
-      const z = Math.sin(angle) * radius * 0.56;
+    constellationSkills.forEach((label, index) => {
+      const { x, y, z, phase } = skillPosition(index, constellationSkills.length);
 
       const nodeGroup = new Group();
       nodeGroup.position.set(x, y, z);
-      nodeGroup.userData = { phase: angle, lift: y };
+      nodeGroup.userData = { phase, lift: y };
 
       const sphere = new Mesh(nodeGeometry, nodeMaterial);
       nodeGroup.add(sphere);
 
+      const texture = createLabelTexture(label);
       const labelSprite = new Sprite(
         new SpriteMaterial({
-          map: createLabelTexture(label),
+          map: texture,
           transparent: true,
-          opacity: 0.5,
+          opacity: 0.8,
           depthWrite: false,
         })
       );
-      labelSprite.position.set(0, 0.34, 0);
-      labelSprite.scale.set(0.68, 0.26, 1);
+      labelSprite.position.set(0, 0.2, 0);
+      labelSprite.scale.set(texture.image.width / texture.image.height * 0.3, 0.3, 1);
       nodeGroup.add(labelSprite);
 
       const lineGeometry = new BufferGeometry().setFromPoints([
