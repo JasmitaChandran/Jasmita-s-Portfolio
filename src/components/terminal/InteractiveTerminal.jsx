@@ -91,7 +91,7 @@ export default function InteractiveTerminal() {
   };
 
   return <section className="home-terminal-section page-shell" aria-labelledby="terminal-title" id="interactive-terminal">
-    <div className="terminal-intro"><h2 id="terminal-title">A developer profile. An interactive prompt.</h2><p>Start with a button — no terminal experience needed.</p></div>
+    <div className="terminal-intro"><h2 id="terminal-title">Interactive prompt</h2><p>Start with a button — no terminal experience needed.</p></div>
     <motion.div className="interactive-terminal recruiter-terminal" initial={reducedMotion ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.25 }}>
       <div className="terminal-topbar">
         <div className="terminal-dots" aria-hidden="true"><span className="terminal-dot red"/><span className="terminal-dot amber"/><span className="terminal-dot green"/></div>

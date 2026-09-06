@@ -2,7 +2,7 @@
 // Project URLs must be supplied by the owner; do not guess repository names.
 export const profile = {
   name: "Jasmita Chandran",
-  role: "Full Stack Java Developer • Microservices Engineer",
+  role: "Full Stack Developer",
   employer: "SAP Labs India",
   title: "Associate Developer",
   experience: "4+ Years",
@@ -52,7 +52,7 @@ export const projects = {
     name: "LogFlow", subtitle: "Distributed Log & Incident Analysis Platform",
     description: "Microservices-based platform for log ingestion, normalization, correlation, incident detection, and failure-origin analysis.",
     stack: ["Java", "Spring Boot", "Microservices", "Kafka", "PostgreSQL", "OpenSearch", "Valkey", "Docker"],
-    live: "https://log-flow.vercel.app/", github: "",
+    live: "https://log-flow.vercel.app/", github: "https://github.com/JasmitaChandran/StockMetrics",
   },
   sap: {
     name: "SAP Ariba / MDCS", subtitle: "Enterprise Master Data Platform",

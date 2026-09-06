@@ -19,10 +19,9 @@ existing public resume PDF is unchanged and already contains these metrics.
 
 The live LogFlow URL and both Stock Metrics URLs were recovered from the existing
 `public/resume.pdf` links. The Stock Metrics repository was also confirmed in the
-owner's public GitHub repository listing. The resume's LogFlow GitHub annotation
-incorrectly points to Stock Metrics: `projects.logflow.github` is intentionally
-empty until the owner supplies the correct repository. A disabled, labeled button
-is shown instead of a guessed link.
+owner's public GitHub repository listing. At the owner's request,
+`projects.logflow.github` temporarily uses the Stock Metrics repository URL.
+Replace it with the LogFlow repository URL when available.
 
 ## Behavior and verification
 

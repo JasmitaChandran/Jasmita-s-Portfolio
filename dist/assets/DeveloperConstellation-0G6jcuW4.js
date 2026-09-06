@@ -1,4 +1,4 @@
-import{r as Xa,j as ql}from"./index-sbq5yO8Q.js";/**
+import{r as Xa,j as ql}from"./index-DsNjxdD7.js";/**
  * @license
  * Copyright 2010-2026 Three.js Authors
  * SPDX-License-Identifier: MIT

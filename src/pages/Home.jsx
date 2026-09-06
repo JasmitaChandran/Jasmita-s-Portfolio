@@ -77,17 +77,15 @@ export default function Home() {
                 <span>
                   <Code2 size={18} />
                   <span className="hero-highlight-copy">
-                    <small>Core Stack</small>
-                    <strong>Java • Spring Boot</strong>
-                    <span className="hero-stat-detail">Microservices</span>
+                    <small>Full Stack</small>
+                    <strong>Developer</strong>
                   </span>
                 </span>
                 <span>
                   <Layers3 size={18} />
                   <span className="hero-highlight-copy">
-                    <small>Enterprise Impact</small>
-                    <strong>{metrics.entities} Entities</strong>
-                    <span className="hero-stat-detail">SAP Ariba / MDCS</span>
+                    <small>Current Role</small>
+                    <strong>SDE-1 at SAP Labs</strong>
                   </span>
                 </span>
               </div>
