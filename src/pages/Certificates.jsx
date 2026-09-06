@@ -1,4 +1,5 @@
 import React from "react";
+import { metrics } from "../components/terminal/profile.mjs";
 import { motion } from "framer-motion";
 import { BriefcaseBusiness, Building2, CheckCircle2, Code2 } from "lucide-react";
 
@@ -8,10 +9,11 @@ const experiences = [
     role: "Associate Developer",
     period: "Jul 2024 - Present",
     bullets: [
-      "Developed 16 inbound entities in MDCS with JSON schema validation, transformation mapping, CDS schemas, and service integration.",
-      "Implemented file upload for 7 entities with Excel-to-JSON parsing and automated data publishing into SAP MDCS.",
+      `Developed ${metrics.entities} inbound entities in MDCS with JSON schema validation, transformation mapping, CDS schemas, and service integration.`,
+      `Implemented ${metrics.uploads} file-upload entity workflows with Excel-to-JSON parsing and automated data publishing into SAP MDCS.`,
+      `Implemented ${metrics.metadata} dynamic metadata workflows.`,
       "Migrated Angular from v11 to v18.2 and improved SAP Fiori/UI5 search, filters, layout persistence, and upload flows.",
-      "Resolved 20+ UI defects and 10 backend defects while increasing JUnit coverage by 5% with 10,000+ lines of tests.",
+      `Resolved UI and backend defects while increasing JUnit coverage by ${metrics.coverage} with ${metrics.testLines} lines of tests.`,
     ],
   },
   {
@@ -29,7 +31,7 @@ const experiences = [
     role: "Scholar@SAP",
     period: "Jun 2023 - Dec 2023",
     bullets: [
-      "Handled 40+ internal and customer incidents through BCP, IMS, and ServiceNow.",
+      `Handled ${metrics.incidents} internal and customer incidents through BCP, IMS, and ServiceNow.`,
       "Built working understanding of Fiori Elements, XML templating, message handling, side effects, app state handling, MVC protocol, and annotations.",
       "Collaborated with customers across Germany, USA, and China.",
     ],

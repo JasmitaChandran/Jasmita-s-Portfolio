@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { metrics } from "../components/terminal/profile.mjs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Award, ChevronLeft, ChevronRight, Images, X } from "lucide-react";
 import "./Gallery.css";
@@ -7,7 +8,7 @@ const ACHIEVEMENTS = [
   {
     id: 1,
     label: "Leadership",
-    caption: "Delivered Java and Spring Boot training to 50+ freshers through intensive 5-day workshops for the 2024 and 2025 batches.",
+    caption: `Delivered Java and Spring Boot training to ${metrics.trainees} freshers through intensive 5-day workshops for the 2024 and 2025 batches.`,
     photos: [
       "/gallery/A1.jpeg",
       "/gallery/A2.jpeg",
