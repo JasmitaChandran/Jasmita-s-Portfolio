@@ -3,6 +3,13 @@ import assert from "node:assert/strict";
 import { constellationSkills, skillGroups, skillPosition } from "../src/components/constellationSkills.mjs";
 import { stack, projects } from "../src/components/terminal/profile.mjs";
 
+test("Skills tab includes all requested additions without duplicates", () => {
+  const listed = skillGroups.flatMap(group => group.items).flatMap(skill => skill.replace("SpringBoot", "Spring Boot").split(" & "));
+  const requested = ["HTML", "CSS", "Spring Core", "Spring MVC", "REST APIs", "JSON", "WebSockets", "Kafka", "Redis", "Bruno", "SonarQube", "PostgreSQL", "SQLite", "OpenSearch", "SAP CAP", "SAP BTP", "Docker", "DBeaver", "Jenkins", "Maven", "Linux"];
+  for (const skill of requested) assert.ok(listed.includes(skill), skill);
+  assert.equal(new Set(listed).size, listed.length);
+});
+
 test("constellation includes all listed skill groups and normalized terminal/project skills", () => {
   const aliases = { "Git/GitHub": "Git", "Fiori/UI5": "SAP Fiori/UI5", HANA: "SAP HANA" };
   const expected = [...skillGroups.flatMap(group => group.items), ...Object.values(stack).flat(), ...Object.values(projects).flatMap(project => project.stack), "Node.js", "GitHub"];

@@ -6,7 +6,7 @@
 
 .skill-lab {
   position: relative;
-  height: 520px;
+  aspect-ratio: 1180 / 940;
   margin: 26px 0 28px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -19,7 +19,8 @@
 }
 
 .skill-lab::before,
-.skill-lab::after {
+.skill-lab::after,
+.skill-orbit-ring {
   content: "";
   position: absolute;
   left: 50%;
@@ -27,17 +28,22 @@
   border: 1px dashed rgba(255, 255, 255, 0.13);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .skill-lab::before {
-  width: 330px;
-  height: 330px;
+  width: 29.66%;
+  height: 30.85%;
 }
 
 .skill-lab::after {
-  width: 480px;
-  height: 480px;
+  width: 55.08%;
+  height: 58.51%;
 }
+
+.skill-orbit-ring { width: 81.36%; height: 87.23%; }
+.skill-orbit-list { list-style: none; margin: 0; padding: 0; }
+.orbit-core small { color: var(--accent); font-size: 0.72rem; }
 
 .orbit-core {
   position: absolute;
@@ -73,42 +79,53 @@
 
 .skill-orbit-item {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: var(--x);
+  top: var(--y);
   z-index: 3;
-  width: 118px;
-  min-height: 96px;
+  width: 104px;
+  height: 80px;
   display: grid;
   place-items: center;
-  gap: 7px;
-  padding: 12px 8px;
+  gap: 5px;
+  padding: 8px 5px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(10, 12, 17, 0.88);
   color: var(--soft);
   text-align: center;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius))
-    rotate(calc(var(--angle) * -1));
+  transform: translate(-50%, -50%);
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
 .skill-orbit-item:hover {
   border-color: rgba(55, 224, 195, 0.55);
   background: rgba(55, 224, 195, 0.11);
-  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--radius))
-    rotate(calc(var(--angle) * -1)) scale(1.06);
+  transform: translate(-50%, -50%) scale(1.04);
 }
 
-.skill-orbit-item img {
-  width: 34px;
-  height: 34px;
+.skill-orbit-item img,
+.skill-orbit-item svg {
+  width: 26px;
+  height: 26px;
   object-fit: contain;
+}
+
+.skill-orbit-item .skill-logo {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+}
+
+.skill-orbit-item .skill-logo-light {
+  background: #f5f5f5;
+  border-radius: 6px;
 }
 
 .skill-orbit-item span {
   max-width: 96px;
   color: var(--soft);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 850;
   line-height: 1.1;
 }
@@ -145,34 +162,37 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .skill-lab {
-    height: 470px;
-  }
-
-  .skill-orbit-item {
-    --radius: 175px !important;
-  }
 }
 
-@media (max-width: 680px) {
-  .skills-container {
-    width: calc(100% - 24px);
-    max-width: 1180px;
-    padding: 54px 0;
-  }
+/* Fall back to a grid before the orbit can crowd; all skills stay visible. */
+.skill-lab-grid {
+  aspect-ratio: auto;
+  padding: 20px;
+}
+.skill-lab-grid::before, .skill-lab-grid::after, .skill-lab-grid .skill-orbit-ring { display: none; }
+.skill-lab-grid .orbit-core {
+  position: relative; left: auto; top: auto; transform: none;
+  width: 100%; height: 108px; margin-bottom: 16px; border-radius: 8px;
+}
+.skill-lab-grid .skill-orbit-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+.skill-lab-grid .skill-orbit-item, .skill-lab-grid .skill-orbit-item:hover {
+  position: relative; left: auto; top: auto; width: 100%; height: 92px; transform: none;
+}
 
+@media (max-width: 1099px) {
   .skill-lab {
+    aspect-ratio: auto;
     height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
     padding: 14px;
   }
 
   .skill-lab::before,
-  .skill-lab::after {
+  .skill-lab::after,
+  .skill-orbit-ring {
     display: none;
   }
+
+  .skill-orbit-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 
   .orbit-core {
     position: relative;
@@ -181,7 +201,7 @@
     width: 100%;
     height: auto;
     min-height: 108px;
-    grid-column: 1 / -1;
+    margin-bottom: 14px;
     border-radius: 8px;
     transform: none;
   }
@@ -192,11 +212,18 @@
     left: auto;
     top: auto;
     width: 100%;
-    min-height: 92px;
+    height: 92px;
     transform: none;
   }
 
-  .skills-table {
-    grid-template-columns: 1fr;
-  }
+}
+
+@media (max-width: 680px) {
+  .skills-container { width: calc(100% - 24px); padding: 54px 0; }
+  .skill-orbit-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skills-table { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-orbit-item { transition: none; }
 }

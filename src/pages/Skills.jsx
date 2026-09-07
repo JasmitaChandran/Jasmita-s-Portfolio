@@ -1,28 +1,21 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Boxes, Code2, Database, Gauge, Network } from "lucide-react";
 import "./Skills.css";
 import { skillGroups } from "../components/constellationSkills.mjs";
+import { orbitSkills, orbitLogos, orbitPosition, orbitIconColors, orbitLogoBackplates } from "../components/skillOrbit.mjs";
+import { SiBruno, SiOpensearch } from "react-icons/si";
 
-const SKILLS = [
-  { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-  { name: "Spring Boot", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
-  { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-  { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
-  { name: "SAP UI5", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" },
-  { name: "SAP CAP", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" },
-  { name: "SAP BTP", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" },
-  { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-  { name: "NodeJS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-  { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-  { name: "Postman", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-];
+const orbitIcons = {
+  Bruno: SiBruno, OpenSearch: SiOpensearch, "REST APIs": Network,
+  WebSockets: Network, Microservices: Boxes, Eureka: Network, CDS: Database,
+};
 
 const groupIcons = [Code2, Gauge, Network, Database];
 const groups = skillGroups.map((group, index) => ({ ...group, icon: groupIcons[index] }));
 
 export default function Skills() {
+  const reducedMotion = useReducedMotion();
   return (
     <motion.section
       className="skills-container"
@@ -42,27 +35,40 @@ export default function Skills() {
         </p>
       </div>
 
-      <section className="skill-lab" aria-label="Skill orbit">
+      <section className={`skill-lab${orbitSkills.length > 40 ? " skill-lab-grid" : ""}`} aria-label="Skill orbit">
+        <div className="skill-orbit-ring" aria-hidden="true" />
         <div className="orbit-core">
           <strong>Full Stack</strong>
           <span>Java + UI + SAP</span>
+          <small>{orbitSkills.length} skills</small>
         </div>
-        {SKILLS.map((skill, index) => (
-          <motion.div
-            className="skill-orbit-item"
-            key={skill.name}
-            style={{
-              "--angle": `${index * 30}deg`,
-              "--radius": index % 2 === 0 ? "220px" : "150px",
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, delay: index * 0.05 }}
-          >
-            <img src={skill.logo} alt="" />
-            <span>{skill.name}</span>
-          </motion.div>
-        ))}
+        <ul className="skill-orbit-list" role="list">
+          {orbitSkills.map((name, index) => {
+            const { x, y } = orbitPosition(index, orbitSkills.length);
+            const Icon = orbitIcons[name] ?? Code2;
+            return (
+              <motion.li
+                className="skill-orbit-item"
+                key={name}
+                style={{
+                  "--x": `${50 + x / 1180 * 100}%`,
+                  "--y": `${50 + y / 940 * 100}%`,
+                }}
+                initial={reducedMotion ? false : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: reducedMotion ? 0 : 0.3, delay: reducedMotion ? 0 : index % 8 * 0.025 }}
+              >
+                <span className={`skill-logo${orbitLogoBackplates.has(name) ? " skill-logo-light" : ""}`}>
+                  {orbitLogos[name]
+                    ? <img src={orbitLogos[name]} alt="" />
+                    : <Icon aria-hidden="true" style={{ color: orbitIconColors[name] ?? "var(--muted)" }} />}
+                </span>
+                <span>{name}</span>
+              </motion.li>
+            );
+          })}
+        </ul>
       </section>
 
       <div className="skills-table">

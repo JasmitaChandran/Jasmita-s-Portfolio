@@ -39,7 +39,7 @@ export default function Home() {
                   <span>Jasmita</span>
                   <span>Chandran</span>
                 </h1>
-                <pre className="hero-stack-line">{profile.title} @ {profile.employer}</pre>
+                <pre className="hero-stack-line">{profile.title} at {profile.employer}</pre>
               </div>
 
               <div className="hero-profile">

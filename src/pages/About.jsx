@@ -29,7 +29,7 @@ const education = [
     title: "Senior Secondary Education",
     place: "St Michael's Sr. Sec. School, New Delhi",
     meta: "Completed in 2019",
-    detail: "CBSE, 86%",
+    detail: "CBSE, Percentage : 86%",
   },
 ];
 
@@ -46,10 +46,10 @@ export default function About() {
           <BookOpen size={16} />
           Education path
         </span>
-        <h1>Built on strong fundamentals.</h1>
+        <h1>Education Journey</h1>
         <p>
           A software engineering journey shaped by academic depth, consistent
-          practice, and a bias toward building things that can stand up in the
+          practice, and building things that can stand up in the
           real world.
         </p>
       </div>
@@ -61,20 +61,26 @@ export default function About() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, delay: 0.1 }}
         >
-          <h2>Learning style</h2>
-          <p>
-            I like turning theory into working systems: learning a concept,
-            testing it in code, documenting the edge cases, and then explaining
-            it back to others.
-          </p>
           <div className="mini-stat">
-            <strong>8.0</strong>
-            <span>M.Tech GPA</span>
+            <strong>How I Learn</strong>
+            <span>Build → Break → Debug → Understand → Improve</span>
           </div>
+
           <div className="mini-stat">
-            <strong>9.56</strong>
-            <span>BCA GPA</span>
+            <strong>What Drives Me</strong>
+            <span>I enjoy solving complex problems, understanding how systems work end-to-end, and turning ideas into working products.</span>
           </div>
+
+            <div className="mini-stat">
+            <strong>Tech × Finance</strong>
+            <span>Combining software engineering with financial and business context to build more meaningful products.</span>
+          </div>
+
+            <div className="mini-stat">
+            <strong>My Engineering Mindset</strong>
+            <span>Build for reliability. Design for scale. Debug with evidence. Keep things simple.</span>
+          </div>
+
         </motion.div>
 
         <div className="timeline education-timeline">
